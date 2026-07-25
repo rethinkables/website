@@ -101,3 +101,4 @@
   if (reduced) renderer.render(scene, camera);
   else frame();
 })();
+
