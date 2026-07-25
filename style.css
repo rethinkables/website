@@ -6,17 +6,17 @@
   --bg-value-card: rgba(255, 255, 255, 0.7); /* Upper value proposition cards */
   --bg-product-card: #EFECE3;    /* Distinct warm beige product card fill */
   --bg-surface: #FFFFFF;
-  
+
   --text-dark: #11181C;          /* Crisp main body text */
   --text-muted: #52606D;         /* Secondary gray */
   --color-dark-green: #00382B;   /* Deep GovTech green */
-  
+
   --color-amber: #D97706;        /* Orange/amber badge & title accent */
   --color-amber-bg: #F5E8CB;     /* Warm pill banner background */
-  
+
   --color-tag-green-bg: #D9ECE3; /* Soft green tag background */
   --color-tag-green-text: #0F523E;
-  
+
   --border-subtle: #E2DDD0;
   --border-card: #E0DACB;
 
@@ -89,12 +89,10 @@ body {
   text-decoration: none;
 }
 
+/* Logo is now the SVG monogram, not a text character */
 .brand-icon {
-  font-family: var(--font-sans);
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--text-dark);
-  line-height: 1;
+  display: block;
+  flex: none;
 }
 
 .brand-text-group {
@@ -421,6 +419,20 @@ body {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
+.modal-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.modal-sub {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.55;
+}
+
 .modal-close {
   position: absolute;
   top: 1rem;
@@ -457,3 +469,18 @@ body {
 }
 
 .reveal.active { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ==========================================================================
+   7. SECTION HEADER & CARDS GRID (layout helpers)
+   ========================================================================== */
+.section-header { margin-bottom: 0.5rem; }
+.cards-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
