@@ -12,12 +12,12 @@
 
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Three.js CDN (Required for field.js) -->
+  <!-- Three.js CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
-  <!-- THREE.JS AMBIENT BACKGROUND CANVAS -->
+  <!-- AMBIENT THREE.JS CANVAS -->
   <canvas id="field"></canvas>
 
   <!-- NAVBAR -->
@@ -176,10 +176,10 @@
     </section>
   </main>
 
-  <!-- DEPARTMENTAL BLUEPRINT SCOPE MODAL FORM -->
+  <!-- DEPARTMENTAL BLUEPRINT SCOPE MODAL FORM (HIDDEN BY DEFAULT) -->
   <div id="solutionModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-card">
-      <button id="modalCloseBtn" class="modal-close">&times;</button>
+      <button id="modalCloseBtn" class="modal-close" aria-label="Close modal">&times;</button>
       <span class="section-label">GOVERNMENT PARTNERSHIP</span>
       <h3>Submit Departmental Blueprint Scope</h3>
       <p class="modal-sub">Define your operational bottleneck. Our solution architects will construct a zero-capital deployment proposal for your department.</p>
