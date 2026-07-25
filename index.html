@@ -5,402 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rethinkables Technology — Custom GovTech Infrastructure</title>
 
-  <!-- Google Fonts: Newsreader (Serif), Space Mono (Badges), Plus Jakarta Sans (Sans) -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-  <style>
-    /* ==========================================================================
-       1. EXACT ORIGINAL COLOR PALETTE & DESIGN TOKENS
-       ========================================================================== */
-    :root {
-      --bg-cream: #F7F5EE;           /* Warm main background */
-      --bg-card: #F2EFE6;            /* Subtle card fill */
-      --bg-surface: #FFFFFF;
-      
-      --text-dark: #121811;          /* Dark main text */
-      --text-muted: #4A5568;         /* Subtitle gray */
-      --color-teal: #023A2E;         /* Signature dark teal */
-      --color-teal-hover: #012820;
-      --color-teal-light: #D0E7DF;   /* Light green tag fill */
-      
-      --color-amber: #C27803;        /* Underline & accent orange */
-      --color-amber-bg: #F5E9CE;     /* Yellow notice banner bg */
-      
-      --border-dark: #023A2E;
-      --border-subtle: #E2DDD0;
+  <!-- Link to External Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
 
-      --font-serif: 'Newsreader', Georgia, serif;
-      --font-mono: 'Space Mono', monospace;
-      --font-sans: 'Plus Jakarta Sans', sans-serif;
-    }
-
-    /* ==========================================================================
-       2. GLOBAL RESET & BASE STYLING
-       ========================================================================== */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      background-color: var(--bg-cream);
-      color: var(--text-dark);
-      font-family: var(--font-sans);
-    }
-
-    body {
-      background-color: var(--bg-cream);
-      color: var(--text-dark);
-      line-height: 1.5;
-      overflow-x: hidden;
-      position: relative;
-      min-height: 100vh;
-    }
-
-    .container {
-      width: min(100% - 2.5rem, 1140px);
-      margin-inline: auto;
-    }
-
-    /* Background Particle Canvas */
-    #particleCanvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    /* ==========================================================================
-       3. NAVIGATION BAR
-       ========================================================================== */
-    .navbar {
-      position: relative;
-      z-index: 10;
-      background-color: transparent;
-      padding: 1.25rem 0;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: var(--text-dark);
-      text-decoration: none;
-    }
-
-    .brand-icon {
-      font-family: var(--font-serif);
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--color-teal);
-      line-height: 1;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-dark);
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--color-teal);
-    }
-
-    .btn-outline-teal {
-      border: 1px solid var(--color-teal);
-      color: var(--color-teal) !important;
-      padding: 0.4rem 1rem;
-      border-radius: 4px;
-    }
-
-    /* ==========================================================================
-       4. HERO SECTION
-       ========================================================================== */
-    .hero-section {
-      position: relative;
-      z-index: 5;
-      padding: 3.5rem 0 3rem 0;
-    }
-
-    .tags-wrapper {
-      display: flex;
-      gap: 0.6rem;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .tag {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--color-teal);
-      background-color: transparent;
-      border: 1px solid var(--border-subtle);
-      padding: 0.3rem 0.65rem;
-      border-radius: 2px;
-    }
-
-    .tag-muted {
-      color: var(--text-muted);
-      border-color: var(--border-subtle);
-    }
-
-    /* Editorial Serif Headline */
-    .hero-title {
-      font-family: var(--font-serif);
-      font-size: clamp(2.6rem, 5.2vw, 4.2rem);
-      line-height: 1.05;
-      font-weight: 600;
-      color: var(--text-dark);
-      max-width: 900px;
-      letter-spacing: -0.01em;
-      margin-bottom: 1.5rem;
-    }
-
-    .text-underline {
-      position: relative;
-      display: inline-block;
-    }
-
-    .text-underline::after {
-      content: '';
-      position: absolute;
-      bottom: 2px;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background-color: var(--color-amber);
-      border-bottom: 1px solid var(--color-teal);
-    }
-
-    .hero-description {
-      font-size: 1.15rem;
-      line-height: 1.6;
-      color: var(--text-muted);
-      max-width: 780px;
-      margin-bottom: 1.75rem;
-    }
-
-    .trust-badges {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--color-teal);
-      margin-bottom: 1.75rem;
-      line-height: 1.8;
-    }
-
-    .banner-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background-color: var(--color-amber-bg);
-      color: #5B3A00;
-      padding: 0.65rem 1.25rem;
-      border: 1px solid #E4D0A2;
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      margin-bottom: 2.25rem;
-    }
-
-    /* Buttons */
-    .btn-group {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.85rem 1.6rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-      border-radius: 4px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn-teal {
-      background-color: var(--color-teal);
-      color: #FFFFFF;
-      border: 1px solid var(--color-teal);
-      box-shadow: 0 4px 12px rgba(2, 58, 46, 0.15);
-    }
-
-    .btn-teal:hover {
-      background-color: var(--color-teal-hover);
-    }
-
-    .btn-outline-dark {
-      background-color: transparent;
-      color: var(--text-dark);
-      border: 1px solid var(--text-dark);
-    }
-
-    .btn-outline-dark:hover {
-      background-color: rgba(0, 0, 0, 0.04);
-    }
-
-    /* ==========================================================================
-       5. SAAS PORTFOLIO CARDS
-       ========================================================================== */
-    .portfolio-section {
-      position: relative;
-      z-index: 5;
-      padding: 4rem 0 6rem 0;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .section-label {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--color-teal);
-      margin-bottom: 0.5rem;
-      display: block;
-    }
-
-    .section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      font-weight: 600;
-      margin-bottom: 2.5rem;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 4px;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
-                  border-color 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: var(--color-teal);
-    }
-
-    .card-badge {
-      align-self: flex-start;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      padding: 0.25rem 0.55rem;
-      margin-bottom: 1.25rem;
-      border-radius: 2px;
-    }
-
-    .badge-amber {
-      background-color: #D97706;
-      color: #FFFFFF;
-    }
-
-    .badge-teal {
-      background-color: var(--color-teal-light);
-      color: var(--color-teal);
-      border: 1px solid var(--color-teal);
-    }
-
-    .badge-teal-light {
-      background-color: #E2ECE9;
-      color: var(--text-muted);
-    }
-
-    .card h3 {
-      font-family: var(--font-serif);
-      font-size: 2.1rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-
-    .card h3 span {
-      color: var(--color-amber);
-    }
-
-    .card p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 1.75rem;
-    }
-
-    .card-action {
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--color-teal);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    /* ==========================================================================
-       6. SCROLL ANIMATIONS
-       ========================================================================== */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
+  <!-- Three.js CDN (REQUIRED before field.js) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
-  <!-- FLOATING PARTICLES CANVAS -->
-  <canvas id="particleCanvas"></canvas>
+  <!-- AMBIENT THREE.JS CANVAS -->
+  <canvas id="field"></canvas>
 
   <!-- NAVIGATION BAR -->
-  <header class="navbar">
+  <header class="navbar" id="nav">
     <div class="container nav-container">
       <a href="#" class="brand">
         <span class="brand-icon">R</span> Rethinkables
@@ -409,7 +31,7 @@
         <a href="#portfolio">SaaS Portfolio</a>
         <a href="#how-it-works">How It Works</a>
         <a href="#vision">Platform Vision</a>
-        <a href="#contact" class="btn btn-outline-teal nav-btn">Let's Build</a>
+        <a href="#contact" class="btn btn-outline-teal nav-btn open-modal-btn">Let's Build</a>
       </nav>
     </div>
   </header>
@@ -437,13 +59,13 @@
         </div>
 
         <div class="banner-pill reveal">
-          <span class="pill-icon">⚡</span> 
+          <span class="pill-icon">⚡</span>
           <span>Zero Upfront Software Procurement &nbsp;•&nbsp; Pay Monthly on Verified Field Adoption</span>
         </div>
 
         <div class="btn-group reveal">
           <a href="#portfolio" class="btn btn-teal">Explore SaaS Suite</a>
-          <a href="#contact" class="btn btn-outline-dark">Let's Build Solution Architecture</a>
+          <a href="#contact" class="btn btn-outline-dark open-modal-btn">Let's Build Solution Architecture</a>
         </div>
 
       </div>
@@ -467,7 +89,7 @@
               <h3>EduAttend<span>.AI</span></h3>
               <p>Verified classroom attendance and automated mid-day meal reconciliation for government schools. Operates 100% offline on standard smartphones.</p>
             </div>
-            <a href="#contact" class="card-action">Request District Pilot &rarr;</a>
+            <a href="#contact" class="card-action open-modal-btn">Request District Pilot &rarr;</a>
           </div>
 
           <!-- Card 2: FieldVerify Engine -->
@@ -477,7 +99,7 @@
               <h3>FieldVerify Engine</h3>
               <p>Geotagged, tamper-evident audit logs and telemetry for Public Works, SDO Tenders, and rural infrastructure projects.</p>
             </div>
-            <a href="#contact" class="card-action">Deploy Infrastructure &rarr;</a>
+            <a href="#contact" class="card-action open-modal-btn">Deploy Infrastructure &rarr;</a>
           </div>
 
           <!-- Card 3: BeneficiaryTrace -->
@@ -487,7 +109,7 @@
               <h3>BeneficiaryTrace</h3>
               <p>On-device verification infrastructure for MGNREGA worker presence, ASHA/ANM health visits, and scheme distribution.</p>
             </div>
-            <a href="#contact" class="card-action">Explore Solution &rarr;</a>
+            <a href="#contact" class="card-action open-modal-btn">Explore Solution &rarr;</a>
           </div>
 
         </div>
@@ -496,66 +118,8 @@
     </section>
   </main>
 
-  <script>
-    // Floating Rectangular Particles Animation
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-    }
-
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    const particles = Array.from({ length: 40 }, () => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      width: Math.random() * 8 + 6,
-      height: Math.random() * 32 + 16,
-      speed: Math.random() * 0.45 + 0.15,
-      color: Math.random() > 0.85 ? 'rgba(194, 120, 3, 0.35)' : 'rgba(208, 231, 223, 0.75)',
-      borderColor: 'rgba(2, 58, 46, 0.12)'
-    }));
-
-    function renderParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach(p => {
-        ctx.fillStyle = p.color;
-        ctx.fillRect(p.x, p.y, p.width, p.height);
-
-        ctx.strokeStyle = p.borderColor;
-        ctx.strokeRect(p.x, p.y, p.width, p.height);
-
-        p.y += p.speed;
-
-        if (p.y > canvas.height) {
-          p.y = -p.height;
-          p.x = Math.random() * canvas.width;
-        }
-      });
-
-      requestAnimationFrame(renderParticles);
-    }
-
-    renderParticles();
-
-    // Intersection Observer for Smooth Scroll Reveals
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    }, {
-      threshold: 0.1
-    });
-
-    document.querySelectorAll('.reveal').forEach(element => {
-      observer.observe(element);
-    });
-  </script>
+  <!-- External JS File Imports -->
+  <script src="field.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
