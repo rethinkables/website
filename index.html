@@ -61,7 +61,7 @@ body{
   transition:background .3s ease,box-shadow .3s ease,padding .3s ease;
 }
 .nav.scrolled{
-  background:rgba(250,248,243,.9);
+  background:rgba(250,248,243,.95);
   backdrop-filter:saturate(140%) blur(10px);
   box-shadow:0 1px 0 var(--line);
   padding-top:12px;padding-bottom:12px;
@@ -202,15 +202,56 @@ h2{font-family:var(--serif);font-weight:600;letter-spacing:-.015em;line-height:1
 .principle h3{font-family:var(--serif);font-weight:600;font-size:21px;margin-bottom:12px;letter-spacing:-.01em}
 .principle p{color:var(--muted);font-size:15.5px}
 
-/* ---------- CONTACT ---------- */
-.contact{background:var(--ink);color:var(--paper);text-align:center}
-.contact-wrap{max-width:660px}
-.contact .section-eyebrow{color:var(--gold)}
-.contact h2{color:var(--paper);font-size:clamp(28px,4.4vw,48px);letter-spacing:-.02em}
-.contact-lede{margin:20px auto 0;color:rgba(250,248,243,.75);font-size:17px;max-width:46ch}
-.contact-lines{margin-top:40px;display:flex;flex-direction:column;gap:12px;align-items:center}
-.contact-line{font-family:var(--mono);font-size:clamp(15px,2vw,19px);color:var(--paper);text-decoration:none;letter-spacing:.02em;border-bottom:1px solid transparent;transition:border-color .2s}
-a.contact-line:hover{border-color:var(--gold)}
+/* ---------- CONTACT & FORM ---------- */
+.contact{background:var(--ink);color:var(--paper)}
+.contact-wrap{max-width:820px;margin:0 auto}
+.contact .section-eyebrow{color:var(--gold);text-align:center}
+.contact h2{color:var(--paper);font-size:clamp(28px,4.4vw,48px);letter-spacing:-.02em;text-align:center}
+.contact-lede{margin:16px auto 36px;color:rgba(250,248,243,.75);font-size:17px;max-width:48ch;text-align:center}
+
+.gov-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  background: rgba(250,248,243,0.04);
+  border: 1px solid rgba(250,248,243,0.12);
+  padding: clamp(20px, 4vw, 36px);
+  border-radius: 4px;
+}
+.full-span { grid-column: span 2; }
+.form-field { display: flex; flex-direction: column; gap: 6px; }
+.form-field label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+.form-field input, .form-field select, .form-field textarea {
+  background: rgba(10,21,18,0.8);
+  border: 1px solid rgba(250,248,243,0.2);
+  padding: 12px 14px;
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 14.5px;
+  border-radius: 2px;
+  min-height: 46px;
+}
+.form-field textarea { min-height: 100px; resize: vertical; }
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.form-submit-btn {
+  width: 100%;
+  background: var(--gold);
+  color: var(--ink);
+  padding: 14px;
+  border: none;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-radius: 2px;
+}
+.form-submit-btn:hover { background: #d99f32; }
+
+.contact-lines{margin-top:36px;display:flex;flex-direction:column;gap:8px;align-items:center}
+.contact-line{font-family:var(--mono);font-size:15px;color:var(--paper);text-decoration:none;letter-spacing:.02em}
 .contact-line.muted{color:rgba(250,248,243,.55)}
 
 /* ---------- FOOTER ---------- */
@@ -229,6 +270,8 @@ a.contact-line:hover{border-color:var(--gold)}
   .step{border-left:none;padding-left:0}
   .step:nth-child(odd){padding-right:26px}
   .principle-row{grid-template-columns:1fr}
+  .gov-form{grid-template-columns:1fr}
+  .full-span{grid-column:span 1}
 }
 @media (max-width:560px){
   .feature-grid{grid-template-columns:1fr}
@@ -278,7 +321,7 @@ a.contact-line:hover{border-color:var(--gold)}
     </p>
     <div class="hero-actions">
       <a href="#product" class="btn btn-primary">See the product</a>
-      <a href="#platform" class="btn btn-ghost">The wider vision</a>
+      <a href="#contact" class="btn btn-ghost">Request Consultation</a>
     </div>
     <div class="hero-legend" aria-hidden="true">
       <span class="legend-item"><i class="dot dot-teal"></i>Verified record</span>
@@ -320,7 +363,7 @@ a.contact-line:hover{border-color:var(--gold)}
   </div>
 </section>
 
-<!-- ══════════ PRODUCT (hero product) ══════════ -->
+<!-- ══════════ PRODUCT ══════════ -->
 <section class="band product" id="product">
   <div class="wrap">
     <div class="product-head">
@@ -332,33 +375,27 @@ a.contact-line:hover{border-color:var(--gold)}
     <div class="feature-grid">
       <article class="feature">
         <div class="feature-num">Verified, not typed</div>
-        <p>A full class is recorded in about three minutes on an ordinary smartphone —
-           presence captured by verified means, not entered by hand.</p>
+        <p>A full class is recorded in about three minutes on an ordinary smartphone — presence captured by verified means, not entered by hand.</p>
       </article>
       <article class="feature">
         <div class="feature-num">Works offline</div>
-        <p>No dependence on rural connectivity. Records are held on the device and
-           sync automatically the moment a network appears.</p>
+        <p>No dependence on rural connectivity. Records are held on the device and sync automatically the moment a network appears.</p>
       </article>
       <article class="feature">
         <div class="feature-num">Cannot be altered</div>
-        <p>Every record is written once. It cannot be edited or backdated —
-           so the number a district sees is the number that was taken.</p>
+        <p>Every record is written once. It cannot be edited or backdated — so the number a district sees is the number that was taken.</p>
       </article>
       <article class="feature">
         <div class="feature-num">Meals reconciled nightly</div>
-        <p>Each night, meal claims are checked against verified attendance and any
-           discrepancy is reported as arithmetic — never as accusation.</p>
+        <p>Each night, meal claims are checked against verified attendance and any discrepancy is reported as arithmetic — never as accusation.</p>
       </article>
       <article class="feature">
         <div class="feature-num">Consent by design</div>
-        <p>Student data is enrolled only with written parental consent under the
-           DPDP Act, 2023. Facial matching happens on the device; no images leave the phone.</p>
+        <p>Student data is enrolled only with written parental consent under the DPDP Act, 2023. Facial matching happens on the device; no images leave the phone.</p>
       </article>
       <article class="feature">
         <div class="feature-num">Built for the teacher</div>
-        <p>A support, not a monitor. No punitive mechanism — the teacher's judgment
-           is always final, and honest work gains a verifiable record.</p>
+        <p>A support, not a monitor. No punitive mechanism — the teacher's judgment is always final, and honest work gains a verifiable record.</p>
       </article>
     </div>
   </div>
@@ -373,26 +410,22 @@ a.contact-line:hover{border-color:var(--gold)}
       <li class="step">
         <span class="step-index">01</span>
         <h3>Scan the class</h3>
-        <p>The teacher scans a code at the classroom. The roster, the period, and the
-           assigned subject load — with time and place stamped.</p>
+        <p>The teacher scans a code at the classroom. The roster, the period, and the assigned subject load — with time and place stamped.</p>
       </li>
       <li class="step">
         <span class="step-index">02</span>
         <h3>Sweep the room</h3>
-        <p>A single pass of the camera matches faces on the device itself. Nothing
-           leaves the phone but roll numbers and present-or-absent.</p>
+        <p>A single pass of the camera matches faces on the device itself. Nothing leaves the phone but roll numbers and present-or-absent.</p>
       </li>
       <li class="step">
         <span class="step-index">03</span>
         <h3>Confirm the rest</h3>
-        <p>Anyone unmatched begins as absent. The teacher confirms with a tap —
-           presence is always earned, never assumed.</p>
+        <p>Anyone unmatched begins as absent. The teacher confirms with a tap — presence is always earned, never assumed.</p>
       </li>
       <li class="step">
         <span class="step-index">04</span>
         <h3>Reconcile &amp; report</h3>
-        <p>Records sync when online. Meal claims are reconciled, morning-to-afternoon
-           variance is measured, and the district sees verified figures.</p>
+        <p>Records sync when online. Meal claims are reconciled, morning-to-afternoon variance is measured, and the district sees verified figures.</p>
       </li>
     </ol>
   </div>
@@ -406,13 +439,9 @@ a.contact-line:hover{border-color:var(--gold)}
       <div class="platform-lead">
         <h2>Education is the first product, not the company.</h2>
         <p>
-          The same failure repeats across public programmes: a benefit is sanctioned,
-          a presence is claimed, and no one can verify it. Rethinkables is building the
-          verification layer that applies wherever that gap exists.
+          The same failure repeats across public programmes: a benefit is sanctioned, a presence is claimed, and no one can verify it. Rethinkables is building the verification layer that applies wherever that gap exists.
         </p>
-        <p class="platform-note">
-          One platform. Different department, different budget line — the same root problem.
-        </p>
+        <p class="platform-note">One platform. Different department, different budget line — the same root problem.</p>
       </div>
       <ul class="platform-list">
         <li><span class="pl-name">EduAttend.AI</span><span class="pl-status">Live product</span></li>
@@ -425,18 +454,14 @@ a.contact-line:hover{border-color:var(--gold)}
   </div>
 </section>
 
-<!-- ══════════ SERVICES (secondary) ══════════ -->
+<!-- ══════════ SERVICES ══════════ -->
 <section class="band services" id="services">
   <div class="wrap">
     <p class="section-eyebrow">Beyond the product</p>
     <div class="services-grid">
       <div class="services-lead">
         <h2>Verification-grade software, built for the public sector.</h2>
-        <p>
-          The same engineering discipline behind EduAttend — offline-first, tamper-evident,
-          consent-first — is available to departments and institutions building their own
-          public-service systems.
-        </p>
+        <p>The same engineering discipline behind EduAttend — offline-first, tamper-evident, consent-first — is available to departments and institutions building their own public-service systems.</p>
       </div>
       <div class="services-cards">
         <div class="svc-card">
@@ -477,18 +502,61 @@ a.contact-line:hover{border-color:var(--gold)}
   </div>
 </section>
 
-<!-- ══════════ CONTACT ══════════ -->
+<!-- ══════════ CONTACT & LEAD INTAKE ══════════ -->
 <section class="band contact" id="contact">
   <div class="wrap contact-wrap">
-    <p class="section-eyebrow light">Contact</p>
+    <p class="section-eyebrow light">Departmental Channel</p>
     <h2>Building something for the public sector?</h2>
     <p class="contact-lede">
-      Whether you administer a district, run a department, or are looking to partner —
-      we would value the conversation.
+      Whether you administer a district, run a department, or are looking to partner — submit your administrative scope below.
     </p>
+
+    <!-- Google Sheet Connected Intake Form -->
+    <form id="govForm" class="gov-form">
+      <div class="form-field">
+        <label>Officer Full Name & Designation</label>
+        <input type="text" id="officer_name" placeholder="e.g., Shri Rajesh Kumar, IAS / SDO" required>
+      </div>
+
+      <div class="form-field">
+        <label>Department / Ministry</label>
+        <input type="text" id="department" placeholder="e.g., Dept of School Education" required>
+      </div>
+
+      <div class="form-field">
+        <label>District / Division</label>
+        <input type="text" id="division" placeholder="e.g., Lakhimpur Kheri, UP" required>
+      </div>
+
+      <div class="form-field">
+        <label>Official Email / Contact Details</label>
+        <input type="text" id="contact" placeholder="officer@nic.in / Mobile" required>
+      </div>
+
+      <div class="form-field full-span">
+        <label>Primary Administrative Challenge</label>
+        <select id="challenge" required>
+          <option value="">-- Select Administrative Area --</option>
+          <option value="attendance">Ground Field Adoption & EduAttend.AI</option>
+          <option value="telemetry">Lack of Verified Ground Telemetry</option>
+          <option value="digitization">Custom Verification Process Digitization</option>
+          <option value="tender-risk">Zero-Capex / Monthly SaaS Procurement</option>
+        </select>
+      </div>
+
+      <div class="form-field full-span">
+        <label>Specific Problem Statement & Field Scope</label>
+        <textarea id="problem" placeholder="Detail ground realities or district scope..." required></textarea>
+      </div>
+
+      <div class="full-span">
+        <button type="submit" id="submitBtn" class="form-submit-btn">Request Departmental Blueprint</button>
+      </div>
+    </form>
+
     <div class="contact-lines">
       <a href="mailto:contact@rethinkables.in" class="contact-line">contact@rethinkables.in</a>
-      <span class="contact-line muted">Lakhimpur Kheri, Uttar Pradesh</span>
+      <span class="contact-line muted">Registered in Lakhimpur Kheri, Uttar Pradesh · DPIIT Recognised</span>
     </div>
   </div>
 </section>
@@ -513,11 +581,7 @@ a.contact-line:hover{border-color:var(--gold)}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-/* ============================================================
-   The verification field.
-   A slow drift of small marks — most teal (verified), a few
-   gold (flagged). The product thesis as ambient motion.
-   ============================================================ */
+/* Ambient Verification Field Animation */
 (function () {
   const canvas = document.getElementById('field');
   if (!canvas || typeof THREE === 'undefined') return;
@@ -623,7 +687,7 @@ a.contact-line:hover{border-color:var(--gold)}
   }
 })();
 
-// Scroll Header Navbar Effect
+// Scroll Header Effects
 window.addEventListener('scroll', () => {
   const nav = document.getElementById('nav');
   if (window.scrollY > 40) {
@@ -631,6 +695,44 @@ window.addEventListener('scroll', () => {
   } else {
     nav.classList.remove('scrolled');
   }
+});
+
+// Google Sheets Integration Script
+const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+document.getElementById('govForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = "Transmitting...";
+
+  const payload = {
+      officer_name: document.getElementById('officer_name').value,
+      department: document.getElementById('department').value,
+      division: document.getElementById('division').value,
+      contact: document.getElementById('contact').value,
+      challenge: document.getElementById('challenge').value,
+      problem: document.getElementById('problem').value
+  };
+
+  fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+  })
+  .then(() => {
+      alert('Departmental Blueprint Request Received. A technical strategist from Rethinkables Technology will contact your office within 24 hours.');
+      document.getElementById('govForm').reset();
+      btn.disabled = false;
+      btn.textContent = "Request Departmental Blueprint";
+  })
+  .catch(error => {
+      alert('Submission error. Please verify network connection or write directly to contact@rethinkables.in');
+      btn.disabled = false;
+      btn.textContent = "Request Departmental Blueprint";
+  });
 });
 </script>
 </body>
