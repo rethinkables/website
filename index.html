@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rethinkables Technology | Public Sector SaaS & Field Intelligence</title>
+    <!-- Three.js CDN for 3D Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        /* WebGL Background */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 8%;
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            color: #ffffff;
+        }
+
+        .logo span { color: #10b981; }
+
+        .nav-btn {
+            background: #10b981;
+            color: #0b0f19;
+            padding: 0.6rem 1.4rem;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #059669;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 10rem 8% 6rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #9ca3af;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+        }
+
+        /* Highlights Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 8%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(17, 24, 39, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2.5rem;
+            backdrop-filter: blur(8px);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #10b981;
+        }
+
+        .card h3 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: #9ca3af;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Lead Capture Section */
+        .form-section {
+            padding: 6rem 8%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-container {
+            background: rgba(17, 24, 39, 0.9);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .form-container h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .form-container p {
+            color: #9ca3af;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            color: #d1d5db;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: #0b0f19;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #10b981;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #10b981;
+            color: #0b0f19;
+            padding: 1rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: #059669;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .form-container { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <nav>
+        <div class="logo">RETHINKABLES <span>TECH</span></div>
+        <a href="#request-portal" class="nav-btn">Officer Consultation</a>
+    </nav>
+
+    <section class="hero">
+        <div class="badge">Zero Upfront Capital Expenditure</div>
+        <h1>Custom SaaS & Field Intelligence Built for Public Administration</h1>
+        <p>We eliminate government technology risk. Deploy custom field platforms paid via flexible monthly subscriptions—no upfront waste, 100% audit-compliant, and optimized for actual ground adoption.</p>
+    </section>
+
+    <section class="grid">
+        <div class="card">
+            <h3>🛡️ Zero Financial Risk</h3>
+            <p>No large upfront tender lock-ins. Pay a predictable monthly subscription only as long as the solution serves your administration's operational goals.</p>
+        </div>
+        <div class="card">
+            <h3>⚡ Intent & Adoption Engineering</h3>
+            <p>Technology fails when field workers reject it. Our software is designed for field conditions with zero friction and guaranteed compliance.</p>
+        </div>
+        <div class="card">
+            <h3>📊 Real-time Executive Oversight</h3>
+            <p>Direct dashboard access for IAS officers, SDOs, and department heads with tamper-proof logs and automated field verification updates.</p>
+        </div>
+    </section>
+
+    <section class="form-section" id="request-portal">
+        <div class="form-container">
+            <h2>Departmental Solution Portal</h2>
+            <p>Submit your administrative parameters to request a custom deployment blueprint.</p>
+            
+            <form id="officerForm">
+                <div class="form-group">
+                    <label>Officer Full Name & Designation</label>
+                    <input type="text" placeholder="e.g., Shri A. Sharma, IAS / SDO" required>
+                </div>
+                <div class="form-group">
+                    <label>Department / Ministry</label>
+                    <input type="text" placeholder="e.g., Department of Education / District Administration" required>
+                </div>
+                <div class="form-group">
+                    <label>Official Email or Contact Number</label>
+                    <input type="text" placeholder="officer@gov.in or Mobile" required>
+                </div>
+                <div class="form-group">
+                    <label>Primary Field Challenge</label>
+                    <select required>
+                        <option value="">-- Select Administrative Challenge --</option>
+                        <option value="field-adoption">Low Field Worker Tech Adoption</option>
+                        <option value="realtime-data">Lack of Real-Time Ground Telemetry</option>
+                        <option value="attendance-tracking">Attendance & Resource Tracking</option>
+                        <option value="custom-saas">Custom Process Digitization</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Brief Operational Requirements</label>
+                    <textarea rows="4" placeholder="Describe the ground problem or district scope..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Request Custom SaaS Blueprint</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Rethinkables Technology Private Limited. Confidential Public Sector Portal.</p>
+    </footer>
+
+    <!-- Three.js Interactive Particle Mesh Script -->
+    <script>
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        // Particle Grid
+        const particlesCount = 700;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i=0; i<particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 10;
+        }
+
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 0.025,
+            color: 0x10b981
+        });
+
+        const particlesMesh = new THREE.Points(geometry, material);
+        scene.add(particlesMesh);
+
+        camera.position.z = 3;
+
+        // Mouse interaction
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) - 0.5;
+            mouseY = (e.clientY / window.innerHeight) - 0.5;
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            particlesMesh.rotation.y += 0.002;
+            particlesMesh.rotation.x += 0.001;
+
+            particlesMesh.rotation.y += mouseX * 0.05;
+            particlesMesh.rotation.x += mouseY * 0.05;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Form Submission
+        document.getElementById('officerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Consultation Request Received. A technical strategist from Rethinkables Technology will contact your office shortly.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
+
