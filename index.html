@@ -1,308 +1,561 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Rethinkables Technology — Verified GovTech Infrastructure</title>
-<meta name="description" content="Rethinkables Technology builds zero-capex verification infrastructure for government. Custom operational software and EduAttend.AI with ₹0 upfront cost.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rethinkables Technology — Custom GovTech Infrastructure</title>
 
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Newsreader (Serif), Space Mono (Badges), Plus Jakarta Sans (Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-<!-- External Stylesheet -->
-<link rel="stylesheet" href="style.css">
+  <style>
+    /* ==========================================================================
+       1. EXACT ORIGINAL COLOR PALETTE & DESIGN TOKENS
+       ========================================================================== */
+    :root {
+      --bg-cream: #F7F5EE;           /* Warm main background */
+      --bg-card: #F2EFE6;            /* Subtle card fill */
+      --bg-surface: #FFFFFF;
+      
+      --text-dark: #121811;          /* Dark main text */
+      --text-muted: #4A5568;         /* Subtitle gray */
+      --color-teal: #023A2E;         /* Signature dark teal */
+      --color-teal-hover: #012820;
+      --color-teal-light: #D0E7DF;   /* Light green tag fill */
+      
+      --color-amber: #C27803;        /* Underline & accent orange */
+      --color-amber-bg: #F5E9CE;     /* Yellow notice banner bg */
+      
+      --border-dark: #023A2E;
+      --border-subtle: #E2DDD0;
+
+      --font-serif: 'Newsreader', Georgia, serif;
+      --font-mono: 'Space Mono', monospace;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* ==========================================================================
+       2. GLOBAL RESET & BASE STYLING
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      font-family: var(--font-sans);
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      line-height: 1.5;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(100% - 2.5rem, 1140px);
+      margin-inline: auto;
+    }
+
+    /* Background Particle Canvas */
+    #particleCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       3. NAVIGATION BAR
+       ========================================================================== */
+    .navbar {
+      position: relative;
+      z-index: 10;
+      background-color: transparent;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--text-dark);
+      text-decoration: none;
+    }
+
+    .brand-icon {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--color-teal);
+      line-height: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-teal);
+    }
+
+    .btn-outline-teal {
+      border: 1px solid var(--color-teal);
+      color: var(--color-teal) !important;
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+    }
+
+    /* ==========================================================================
+       4. HERO SECTION
+       ========================================================================== */
+    .hero-section {
+      position: relative;
+      z-index: 5;
+      padding: 3.5rem 0 3rem 0;
+    }
+
+    .tags-wrapper {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-teal);
+      background-color: transparent;
+      border: 1px solid var(--border-subtle);
+      padding: 0.3rem 0.65rem;
+      border-radius: 2px;
+    }
+
+    .tag-muted {
+      color: var(--text-muted);
+      border-color: var(--border-subtle);
+    }
+
+    /* Editorial Serif Headline */
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.6rem, 5.2vw, 4.2rem);
+      line-height: 1.05;
+      font-weight: 600;
+      color: var(--text-dark);
+      max-width: 900px;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+
+    .text-underline {
+      position: relative;
+      display: inline-block;
+    }
+
+    .text-underline::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--color-amber);
+      border-bottom: 1px solid var(--color-teal);
+    }
+
+    .hero-description {
+      font-size: 1.15rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 780px;
+      margin-bottom: 1.75rem;
+    }
+
+    .trust-badges {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--color-teal);
+      margin-bottom: 1.75rem;
+      line-height: 1.8;
+    }
+
+    .banner-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--color-amber-bg);
+      color: #5B3A00;
+      padding: 0.65rem 1.25rem;
+      border: 1px solid #E4D0A2;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      margin-bottom: 2.25rem;
+    }
+
+    /* Buttons */
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 1.6rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-teal {
+      background-color: var(--color-teal);
+      color: #FFFFFF;
+      border: 1px solid var(--color-teal);
+      box-shadow: 0 4px 12px rgba(2, 58, 46, 0.15);
+    }
+
+    .btn-teal:hover {
+      background-color: var(--color-teal-hover);
+    }
+
+    .btn-outline-dark {
+      background-color: transparent;
+      color: var(--text-dark);
+      border: 1px solid var(--text-dark);
+    }
+
+    .btn-outline-dark:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    /* ==========================================================================
+       5. SAAS PORTFOLIO CARDS
+       ========================================================================== */
+    .portfolio-section {
+      position: relative;
+      z-index: 5;
+      padding: 4rem 0 6rem 0;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-teal);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 600;
+      margin-bottom: 2.5rem;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                  border-color 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-teal);
+    }
+
+    .card-badge {
+      align-self: flex-start;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.55rem;
+      margin-bottom: 1.25rem;
+      border-radius: 2px;
+    }
+
+    .badge-amber {
+      background-color: #D97706;
+      color: #FFFFFF;
+    }
+
+    .badge-teal {
+      background-color: var(--color-teal-light);
+      color: var(--color-teal);
+      border: 1px solid var(--color-teal);
+    }
+
+    .badge-teal-light {
+      background-color: #E2ECE9;
+      color: var(--text-muted);
+    }
+
+    .card h3 {
+      font-family: var(--font-serif);
+      font-size: 2.1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .card h3 span {
+      color: var(--color-amber);
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+    }
+
+    .card-action {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--color-teal);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* ==========================================================================
+       6. SCROLL ANIMATIONS
+       ========================================================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
 <body>
 
-<!-- ══════════ NAVIGATION ══════════ -->
-<header class="nav" id="nav">
-  <a class="brand" href="#top" aria-label="Rethinkables Technology home">
-    <svg class="brand-mark" width="28" height="28" viewBox="0 0 82 82" aria-hidden="true">
-      <g stroke-linecap="square">
-        <path d="M22 14 V70" stroke="#0A5A4E" stroke-width="7.5"/>
-        <path d="M22 14 H42" stroke="#0A5A4E" stroke-width="7.5"/>
-        <path d="M42 14 a14 14 0 0 1 0 28 H22" fill="none" stroke="#0A5A4E" stroke-width="7.5"/>
-        <path d="M41 42 L62 70" stroke="#C9922A" stroke-width="7.5" stroke-linecap="round"/>
-      </g>
-    </svg>
-    <span class="brand-text">Rethinkables<span class="brand-sub">Technology</span></span>
-  </a>
-  <nav class="nav-links" aria-label="Primary">
-    <a href="#products">SaaS Portfolio</a>
-    <a href="#how">How It Works</a>
-    <a href="#platform">Platform Vision</a>
-    <button type="button" class="nav-cta open-modal-btn">Let's Build</button>
-  </nav>
-</header>
+  <!-- FLOATING PARTICLES CANVAS -->
+  <canvas id="particleCanvas"></canvas>
 
-<!-- ══════════ HERO SECTION ══════════ -->
-<section class="hero" id="top">
-  <canvas id="field" aria-hidden="true"></canvas>
-  <div class="hero-inner">
-    <div class="badge-row">
-      <span class="eyebrow">GovTech Verification Infrastructure Engine</span>
-      <span class="dpiit-tag">Startup India DPIIT Recognized</span>
+  <!-- NAVIGATION BAR -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand">
+        <span class="brand-icon">R</span> Rethinkables
+      </a>
+      <nav class="nav-links">
+        <a href="#portfolio">SaaS Portfolio</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#vision">Platform Vision</a>
+        <a href="#contact" class="btn btn-outline-teal nav-btn">Let's Build</a>
+      </nav>
     </div>
-    <h1 class="hero-title">
-      Tamper-evident verification infrastructure for <span class="accent-underline">public operations.</span>
-    </h1>
-    <p class="hero-lede">
-      Rethinkables designs, builds, and deploys tamper-evident operational software for government departments with zero upfront capital risk. Powered by on-device AI and offline-first architecture.
-    </p>
-    
-    <div class="accreditation-bar">
-      <span>Startup India DPIIT Recognized Startup</span> · 
-      <span>StartInUP</span> · 
-      <span>Mentored by iCreate, Gujarat</span> · 
-      <span>DPDP Act, 2023 Compliant</span>
-    </div>
+  </header>
 
-    <div class="hero-guarantee">
-      ⚡ Zero Upfront Software Procurement · Pay Monthly on Verified Field Adoption
-    </div>
-    
-    <div class="hero-actions">
-      <a href="#products" class="btn btn-primary">Explore SaaS Suite</a>
-      <button type="button" class="btn btn-ghost open-modal-btn">Let's Build Solution Architecture</button>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ DE-RISKING MODEL ══════════ -->
-<section class="zero-risk-band reveal">
-  <div class="wrap">
-    <p class="section-eyebrow">De-risking District Adoption</p>
-    <div class="risk-grid">
-      <div class="risk-card">
-        <h3>₹0 Upfront Software Cost</h3>
-        <p>No multi-crore IT tender lock-in. Districts and departments deploy custom verification infrastructure with zero capital risk.</p>
-      </div>
-      <div class="risk-card">
-        <h3>Pay-Per-Month SaaS</h3>
-        <p>Pay purely via predictable monthly operational subscriptions. Scale or pause anytime based on actual field adoption.</p>
-      </div>
-      <div class="risk-card">
-        <h3>100% Audit Protection</h3>
-        <p>Eliminate public fund waste. Every rupee spent is backed by tamper-evident digital logs under DPDP Act, 2023 guidelines.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ SAAS PORTFOLIO ══════════ -->
-<section class="band products reveal" id="products">
-  <div class="wrap">
-    <p class="section-eyebrow">SaaS Product Portfolio</p>
-    <h2>Vertical Software Built for Public Operations</h2>
-    
-    <div class="product-suite-grid">
-      <!-- EduAttend.AI (Flagship) -->
-      <article class="product-card">
-        <div>
-          <span class="product-badge badge-pilot">Live &amp; Pilot Ready</span>
-          <h3>EduAttend<span class="ai">.AI</span></h3>
-          <p>Verified classroom attendance and automated mid-day meal reconciliation for government schools. Operates 100% offline on standard smartphones.</p>
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="container hero-content">
+        
+        <div class="tags-wrapper reveal">
+          <span class="tag">GOVTECH ENGINE</span>
+          <span class="tag tag-muted">STARTUP INDIA DPIIT RECOGNIZED</span>
         </div>
-        <button type="button" class="product-link open-modal-btn">Request District Pilot &rarr;</button>
-      </article>
 
-      <!-- FieldVerify Engine -->
-      <article class="product-card">
-        <div>
-          <span class="product-badge badge-module">Deployable Engine</span>
-          <h3>FieldVerify Engine</h3>
-          <p>Geotagged, tamper-evident audit logs and telemetry for Public Works, SDO Tenders, and rural infrastructure inspections.</p>
-        </div>
-        <button type="button" class="product-link open-modal-btn">Deploy Infrastructure Module &rarr;</button>
-      </article>
+        <h1 class="hero-title reveal">
+          Custom digital infrastructure built for <span class="text-underline">any government challenge.</span>
+        </h1>
 
-      <!-- BeneficiaryTrace -->
-      <article class="product-card">
-        <div>
-          <span class="product-badge badge-module">Pilot Ready</span>
-          <h3>BeneficiaryTrace</h3>
-          <p>On-device verification infrastructure for MGNREGA worker presence, ASHA/ANM health visits, and Anganwadi child nutrition programs.</p>
-        </div>
-        <button type="button" class="product-link open-modal-btn">Request Program Verification &rarr;</button>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ HOW IT WORKS ══════════ -->
-<section class="band how reveal" id="how">
-  <div class="wrap">
-    <p class="section-eyebrow">Operational Methodology</p>
-    <h2 class="how-title">Four steps. Three minutes. Fully offline.</h2>
-    <ol class="steps">
-      <li class="step">
-        <span class="step-index">01</span>
-        <h3>Capture the field</h3>
-        <p>Staff capture ground realities via lightweight mobile apps with time, location, and verified media stamped on-device.</p>
-      </li>
-      <li class="step">
-        <span class="step-index">02</span>
-        <h3>On-device inference</h3>
-        <p>Matching and telemetry processing occur locally on the phone. No sensitive personal data leaves the local hardware without encryption.</p>
-      </li>
-      <li class="step">
-        <span class="step-index">03</span>
-        <h3>Human confirmation</h3>
-        <p>Unmatched records flag for quick supervisor review. Human judgment remains final; honest field work gains an undeniable record.</p>
-      </li>
-      <li class="step">
-        <span class="step-index">04</span>
-        <h3>Reconcile &amp; report</h3>
-        <p>Records sync automatically when connectivity resumes. Discrepancies are reported as pure arithmetic for district leadership.</p>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<!-- ══════════ PLATFORM VISION ══════════ -->
-<section class="band platform reveal" id="platform">
-  <div class="wrap">
-    <p class="section-eyebrow light">The wider vision</p>
-    <div class="platform-grid">
-      <div class="platform-lead">
-        <h2>Education is our first product, not our boundary.</h2>
-        <p>
-          The same failure repeats across public programmes: a benefit is sanctioned, a presence is claimed, and no one can verify it. Rethinkables builds the verification engine that applies wherever that gap exists.
+        <p class="hero-description reveal">
+          Rethinkables designs, builds, and deploys purpose-built operational software for public departments with zero upfront capital risk. Powered by on-device AI, offline-first architecture, and custom field workflows tailored to your specific administrative needs.
         </p>
-        <p class="platform-note">One core engine. Different department, different budget line — the same root problem.</p>
+
+        <div class="trust-badges reveal">
+          Startup India DPIIT Recognized Startup &nbsp;•&nbsp; StartInUP &nbsp;•&nbsp; Mentored by iCreate, Gujarat &nbsp;•&nbsp; DPDP Act, 2023 Compliant
+        </div>
+
+        <div class="banner-pill reveal">
+          <span class="pill-icon">⚡</span> 
+          <span>Zero Upfront Software Procurement &nbsp;•&nbsp; Pay Monthly on Verified Field Adoption</span>
+        </div>
+
+        <div class="btn-group reveal">
+          <a href="#portfolio" class="btn btn-teal">Explore SaaS Suite</a>
+          <a href="#contact" class="btn btn-outline-dark">Let's Build Solution Architecture</a>
+        </div>
+
       </div>
-      <ul class="platform-list">
-        <li><span class="pl-name">EduAttend.AI — Education</span><span class="pl-status">Live &amp; Pilot Ready</span></li>
-        <li><span class="pl-name">FieldVerify — Works &amp; SDO Tenders</span><span class="pl-status">Deployable Module</span></li>
-        <li><span class="pl-name">MGNREGA — Worker Attendance</span><span class="pl-status">Pilot Ready</span></li>
-        <li><span class="pl-name">ASHA / ANM — Health Worker Presence</span><span class="pl-status">Roadmap</span></li>
-        <li><span class="pl-name">PDS — Beneficiary Verification</span><span class="pl-status">Roadmap</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ══════════ PRINCIPLES ══════════ -->
-<section class="band principles reveal">
-  <div class="wrap">
-    <p class="section-eyebrow">How we work</p>
-    <div class="principle-row">
-      <div class="principle">
-        <h3 class="principle-title">We measure, we don't accuse.</h3>
-        <p>Our systems report arithmetic. What is done with it is the administration's decision.</p>
+    <!-- SAAS PORTFOLIO SECTION -->
+    <section id="portfolio" class="portfolio-section">
+      <div class="container">
+        
+        <div class="section-header reveal">
+          <span class="section-label">SAAS PRODUCT PORTFOLIO</span>
+          <h2 class="section-title">Vertical Software Built for Public Operations</h2>
+        </div>
+
+        <div class="cards-grid">
+          
+          <!-- Card 1: EduAttend.AI -->
+          <div class="card reveal">
+            <div>
+              <div class="card-badge badge-amber">LIVE & PILOT READY</div>
+              <h3>EduAttend<span>.AI</span></h3>
+              <p>Verified classroom attendance and automated mid-day meal reconciliation for government schools. Operates 100% offline on standard smartphones.</p>
+            </div>
+            <a href="#contact" class="card-action">Request District Pilot &rarr;</a>
+          </div>
+
+          <!-- Card 2: FieldVerify Engine -->
+          <div class="card reveal">
+            <div>
+              <div class="card-badge badge-teal">DEPLOYABLE ENGINE</div>
+              <h3>FieldVerify Engine</h3>
+              <p>Geotagged, tamper-evident audit logs and telemetry for Public Works, SDO Tenders, and rural infrastructure projects.</p>
+            </div>
+            <a href="#contact" class="card-action">Deploy Infrastructure &rarr;</a>
+          </div>
+
+          <!-- Card 3: BeneficiaryTrace -->
+          <div class="card reveal">
+            <div>
+              <div class="card-badge badge-teal-light">PILOT READY</div>
+              <h3>BeneficiaryTrace</h3>
+              <p>On-device verification infrastructure for MGNREGA worker presence, ASHA/ANM health visits, and scheme distribution.</p>
+            </div>
+            <a href="#contact" class="card-action">Explore Solution &rarr;</a>
+          </div>
+
+        </div>
+
       </div>
-      <div class="principle">
-        <h3 class="principle-title">We earn trust on evidence.</h3>
-        <p>Study the ground, design with the people who use it, pilot against metrics set beforehand.</p>
-      </div>
-      <div class="principle">
-        <h3 class="principle-title">We say so if it doesn't work.</h3>
-        <p>If a pilot misses the standard we set before it began, we report that ourselves.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
+  </main>
 
-<!-- ══════════ CALL TO ACTION BANNER ══════════ -->
-<section class="band cta-section reveal">
-  <div class="wrap cta-wrap">
-    <p class="section-eyebrow">Direct Officer Channel</p>
-    <h2>Every district has a ground reality state portals never capture.</h2>
-    <p class="cta-lede">You define the administrative scope. We engineer the zero-capex verification layer.</p>
-    <button type="button" class="btn btn-primary open-modal-btn" style="min-height: 52px; font-size: 16px;">
-      Let's Build Your Solution Architecture &rarr;
-    </button>
-  </div>
-</section>
+  <script>
+    // Floating Rectangular Particles Animation
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
 
-<!-- ══════════ INTERACTIVE POPUP MODAL ══════════ -->
-<div class="modal-overlay" id="solutionModal" aria-hidden="true">
-  <div class="modal-card">
-    <button type="button" class="modal-close" id="modalCloseBtn" aria-label="Close modal">&times;</button>
-    
-    <div class="modal-header">
-      <p class="section-eyebrow">Confidential Departmental Channel</p>
-      <h3>Let's Build Your Solution Architecture</h3>
-      <p class="modal-sub">Submit your administrative scope for a zero-capex pilot evaluation.</p>
-    </div>
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    }
 
-    <form id="govForm" class="gov-form">
-      <div class="form-field">
-        <label for="officer_name">Officer Name &amp; Designation</label>
-        <input type="text" id="officer_name" placeholder="e.g., Shri Rajesh Kumar, IAS / SDO" required>
-      </div>
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-      <div class="form-field">
-        <label for="department">Department / Ministry</label>
-        <input type="text" id="department" placeholder="e.g., Dept of School Education / Works" required>
-      </div>
+    const particles = Array.from({ length: 40 }, () => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      width: Math.random() * 8 + 6,
+      height: Math.random() * 32 + 16,
+      speed: Math.random() * 0.45 + 0.15,
+      color: Math.random() > 0.85 ? 'rgba(194, 120, 3, 0.35)' : 'rgba(208, 231, 223, 0.75)',
+      borderColor: 'rgba(2, 58, 46, 0.12)'
+    }));
 
-      <div class="form-field">
-        <label for="division">District / Administrative Division</label>
-        <input type="text" id="division" placeholder="e.g., Lucknow Division, UP" required>
-      </div>
+    function renderParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      <div class="form-field">
-        <label for="contact_info">Official Email / Mobile</label>
-        <input type="text" id="contact_info" placeholder="officer@nic.in / Phone" required>
-      </div>
+      particles.forEach(p => {
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x, p.y, p.width, p.height);
 
-      <div class="form-field full-span">
-        <label for="challenge_category">Operational Ministry / Department Sector</label>
-        <select id="challenge_category" required>
-          <option value="">-- Select State / Central Ministry Category --</option>
-          <option value="School Education & Literacy">School Education & Literacy (Mid-Day Meal / EduAttend.AI)</option>
-          <option value="Public Works & Infrastructure">Public Works & Infrastructure (SDO Projects / Road Audits)</option>
-          <option value="Health & Family Welfare">Health & Family Welfare (ASHA / ANM Field Telemetry)</option>
-          <option value="Rural Development & Panchayati Raj">Rural Development & Panchayati Raj (MGNREGA Muster Rolls)</option>
-          <option value="Food, Civil Supplies & Consumer Affairs">Food, Civil Supplies & Consumer Affairs (PDS Grain Verification)</option>
-          <option value="Women & Child Development">Women & Child Development (Anganwadi / ICDS Nutrition)</option>
-          <option value="Revenue, Disaster Management & Land Records">Revenue, Disaster Management & Land Records</option>
-          <option value="Other">Other Ministry / Custom Sector (Specify Below)</option>
-        </select>
-      </div>
+        ctx.strokeStyle = p.borderColor;
+        ctx.strokeRect(p.x, p.y, p.width, p.height);
 
-      <!-- Conditional Manual Entry Field -->
-      <div class="form-field full-span" id="other_sector_wrapper" style="display: none;">
-        <label for="other_sector_input">Specify Custom Ministry / Department Name</label>
-        <input type="text" id="other_sector_input" placeholder="e.g., Irrigation & Water Resources / Police Logistics">
-      </div>
+        p.y += p.speed;
 
-      <div class="form-field full-span">
-        <label for="problem">Where is the system breaking down on the ground?</label>
-        <textarea id="problem" placeholder="Detail the exact ground reality, operational bottleneck, or district scope to be tested with zero capital risk..." required></textarea>
-      </div>
+        if (p.y > canvas.height) {
+          p.y = -p.height;
+          p.x = Math.random() * canvas.width;
+        }
+      });
 
-      <div class="full-span">
-        <button type="submit" id="submitBtn" class="form-submit-btn">Transmit Departmental Blueprint Scope</button>
-      </div>
-    </form>
-  </div>
-</div>
+      requestAnimationFrame(renderParticles);
+    }
 
-<!-- ══════════ FOOTER ══════════ -->
-<footer class="footer">
-  <div class="wrap footer-wrap">
-    <div class="footer-brand">
-      <svg width="24" height="24" viewBox="0 0 82 82" aria-hidden="true">
-        <g stroke-linecap="square">
-          <path d="M22 14 V70" stroke="#FAF8F3" stroke-width="7.5"/>
-          <path d="M22 14 H42" stroke="#FAF8F3" stroke-width="7.5"/>
-          <path d="M42 14 a14 14 0 0 1 0 28 H22" fill="none" stroke="#FAF8F3" stroke-width="7.5"/>
-          <path d="M41 42 L62 70" stroke="#C9922A" stroke-width="7.5" stroke-linecap="round"/>
-        </g>
-      </svg>
-      <span>Rethinkables Technology Private Limited</span>
-    </div>
-    <p class="footer-meta">Registered in Uttar Pradesh · Startup India DPIIT Recognized · StartInUP · Mentored by iCreate, Gujarat</p>
-  </div>
-</footer>
+    renderParticles();
 
-<!-- External JavaScript Libraries & Modular Scripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="field.js"></script>
-<script src="main.js"></script>
+    // Intersection Observer for Smooth Scroll Reveals
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('.reveal').forEach(element => {
+      observer.observe(element);
+    });
+  </script>
 </body>
 </html>
