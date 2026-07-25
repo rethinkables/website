@@ -1,8 +1,9 @@
-/* ============================================================
-   The Verification Field (Ambient Three.js Canvas)
-   Most marks teal (verified), a few gold (flagged) —
-   the product thesis as ambient motion. Respects reduced-motion.
-   ============================================================ */
+/* =========================================================================
+   The verification field — hero only, deliberately near-still.
+   A slow, low-contrast drift of marks: most green (verified),
+   a few gold (flagged). Atmosphere, not animation. The eye should
+   barely register it moving. Reduced-motion draws a single frame.
+   ========================================================================= */
 (function () {
   const canvas = document.getElementById('field');
   if (!canvas || typeof THREE === 'undefined') return;
@@ -10,61 +11,58 @@
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
-  camera.position.z = 26;
+  const camera = new THREE.PerspectiveCamera(58, 1, 0.1, 100);
+  camera.position.z = 28;
 
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    antialias: true,
-    alpha: true,
-  });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setClearColor(0x000000, 0);
 
-  const TEAL = new THREE.Color(0x0E7C6B);
-  const TEAL_DEEP = new THREE.Color(0x0A5A4E);
-  const GOLD = new THREE.Color(0xC9922A);
+  // palette tuned to the paper background — low contrast, premium restraint
+  const GREEN = new THREE.Color(0x0A3F31);
+  const GREEN_SOFT = new THREE.Color(0x0E5140);
+  const GOLD = new THREE.Color(0xB57E1F);
 
-  const COUNT = window.innerWidth <= 768 ? 80 : 140;
-  const FLAGGED = 8;
+  const COUNT = window.innerWidth <= 768 ? 46 : 78;   // sparse, not busy
+  const FLAGGED = 5;
   const group = new THREE.Group();
   scene.add(group);
 
-  const barGeo = new THREE.PlaneGeometry(0.34, 0.9);
-
+  const barGeo = new THREE.PlaneGeometry(0.30, 0.82);
   const marks = [];
+
   for (let i = 0; i < COUNT; i++) {
     const flagged = i < FLAGGED;
-    const base = flagged ? GOLD : (Math.random() > 0.5 ? TEAL : TEAL_DEEP);
+    const base = flagged ? GOLD : (Math.random() > 0.5 ? GREEN : GREEN_SOFT);
     const mat = new THREE.MeshBasicMaterial({
       color: base,
       transparent: true,
-      opacity: flagged ? 0.55 : (0.10 + Math.random() * 0.16),
+      // deliberately faint: the field is a texture, not a feature
+      opacity: flagged ? 0.30 : (0.05 + Math.random() * 0.09),
       depthWrite: false,
     });
     const m = new THREE.Mesh(barGeo, mat);
-
     m.position.set(
-      (Math.random() - 0.5) * 60,
-      (Math.random() - 0.5) * 40,
-      (Math.random() - 0.5) * 20
+      (Math.random() - 0.5) * 66,
+      (Math.random() - 0.5) * 44,
+      (Math.random() - 0.5) * 22
     );
     m.userData = {
-      driftY: 0.004 + Math.random() * 0.010,
-      swayAmp: 0.3 + Math.random() * 0.8,
-      swayFreq: 0.2 + Math.random() * 0.5,
+      driftY: 0.0016 + Math.random() * 0.0040,   // very slow
+      swayFreq: 0.10 + Math.random() * 0.22,
       phase: Math.random() * Math.PI * 2,
       flagged,
-      pulse: 0.5 + Math.random(),
+      pulse: 0.28 + Math.random() * 0.4,
     };
     group.add(m);
     marks.push(m);
   }
 
-  let targetX = 0, targetY = 0, curX = 0, curY = 0;
+  // barely-there parallax
+  let tX = 0, tY = 0, cX = 0, cY = 0;
   if (!reduced) {
     window.addEventListener('pointermove', (e) => {
-      targetX = (e.clientX / window.innerWidth - 0.5) * 2;
-      targetY = (e.clientY / window.innerHeight - 0.5) * 2;
+      tX = (e.clientX / window.innerWidth - 0.5) * 2;
+      tY = (e.clientY / window.innerHeight - 0.5) * 2;
     }, { passive: true });
   }
 
@@ -83,29 +81,23 @@
 
   function frame() {
     const t = clock.getElapsedTime();
-
     for (const m of marks) {
       const u = m.userData;
       m.position.y += u.driftY;
-      if (m.position.y > 21) m.position.y = -21;
-      m.position.x += Math.sin(t * u.swayFreq + u.phase) * 0.003 * u.swayAmp;
+      if (m.position.y > 23) m.position.y = -23;
+      m.position.x += Math.sin(t * u.swayFreq + u.phase) * 0.0014;
       if (u.flagged) {
-        m.material.opacity = 0.4 + Math.sin(t * u.pulse + u.phase) * 0.18;
+        m.material.opacity = 0.22 + Math.sin(t * u.pulse + u.phase) * 0.10;
       }
     }
-
-    curX += (targetX - curX) * 0.03;
-    curY += (targetY - curY) * 0.03;
-    group.rotation.y = curX * 0.12;
-    group.rotation.x = -curY * 0.08;
-
+    cX += (tX - cX) * 0.02;
+    cY += (tY - cY) * 0.02;
+    group.rotation.y = cX * 0.06;
+    group.rotation.x = -cY * 0.04;
     renderer.render(scene, camera);
     if (!reduced) requestAnimationFrame(frame);
   }
 
-  if (reduced) {
-    renderer.render(scene, camera);
-  } else {
-    frame();
-  }
+  if (reduced) renderer.render(scene, camera);
+  else frame();
 })();
