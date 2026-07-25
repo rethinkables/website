@@ -3,437 +3,694 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rethinkables — Gov-Tech Solutions for Bharat</title>
-<meta name="description" content="Startup India recognized gov-tech consultancy. Building EduAttend.ai — offline-capable attendance for rural government schools.">
-<meta name="keywords" content="government technology, edtech, attendance system, rural schools, India, SaaS, Startup India">
+<title>Rethinkables Technology – Gov-Tech & Field Intelligence for Bharat</title>
+<meta name="description" content="Startup India recognized gov-tech consultancy providing zero-capex custom SaaS, EduAttend.AI, and field intelligence solutions for public administration.">
+<meta name="keywords" content="government technology, edtech, attendance system, rethinkables technology, eduattend.ai, SDO tenders">
+
+<!-- External Fonts & Scripts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇳</text></svg>">
+
+<style>
+:root {
+--bg-dark: #030712;
+--accent-green: #10b981;
+--accent-cyan: #06b6d4;
+--text-main: #f9fafb;
+--text-muted: #9ca3af;
+--glass-bg: rgba(15, 23, 42, 0.75);
+--glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+scroll-behavior: smooth;
+}
+
+body {
+background-color: var(--bg-dark);
+color: var(--text-main);
+font-family: 'Inter', sans-serif;
+overflow-x: hidden;
+}
+
+/* 3D WebGL Canvas */
+#webgl-canvas {
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+z-index: 0;
+pointer-events: none;
+}
+
+/* Navigation Header */
+header {
+position: fixed;
+top: 0;
+width: 100%;
+z-index: 1000;
+padding: 1.25rem 6%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+background: rgba(3, 7, 18, 0.85);
+backdrop-filter: blur(16px);
+border-bottom: 1px solid var(--glass-border);
+}
+
+.brand-logo {
+font-family: 'Space Grotesk', sans-serif;
+font-size: 1.4rem;
+font-weight: 700;
+color: #fff;
+text-decoration: none;
+}
+
+.brand-logo span { color: var(--accent-green); }
+
+.nav-center {
+display: flex;
+gap: 2rem;
+}
+
+.nav-center a {
+color: var(--text-muted);
+text-decoration: none;
+font-size: 0.9rem;
+font-weight: 500;
+transition: color 0.3s;
+}
+
+.nav-center a:hover { color: var(--accent-green); }
+
+.status-pill {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+background: rgba(16, 185, 129, 0.1);
+border: 1px solid rgba(16, 185, 129, 0.3);
+padding: 0.4rem 0.9rem;
+border-radius: 99px;
+font-size: 0.8rem;
+color: var(--accent-green);
+font-weight: 600;
+}
+
+.status-dot {
+width: 8px;
+height: 8px;
+background: var(--accent-green);
+border-radius: 50%;
+box-shadow: 0 0 10px var(--accent-green);
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.btn-primary {
+background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+color: #030712;
+padding: 0.75rem 1.6rem;
+border-radius: 8px;
+font-weight: 700;
+text-decoration: none;
+transition: all 0.3s;
+box-shadow: 0 4px 20px rgba(16, 185, 129, 0.25);
+display: inline-block;
+}
+
+.btn-primary:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
+}
+
+/* Hero Section */
+.hero-container {
+position: relative;
+z-index: 10;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+padding: 9rem 6% 4rem;
+max-width: 1100px;
+margin: 0 auto;
+}
+
+.badge-startup {
+background: rgba(6, 182, 212, 0.1);
+border: 1px solid rgba(6, 182, 212, 0.3);
+color: var(--accent-cyan);
+padding: 0.4rem 1.2rem;
+border-radius: 99px;
+font-size: 0.85rem;
+font-weight: 600;
+margin-bottom: 1.5rem;
+letter-spacing: 0.5px;
+}
+
+.hero-title {
+font-family: 'Space Grotesk', sans-serif;
+font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+font-weight: 700;
+line-height: 1.15;
+margin-bottom: 1.5rem;
+background: linear-gradient(180deg, #ffffff 0%, #9ca3af 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+font-size: clamp(1rem, 2vw, 1.25rem);
+color: var(--text-muted);
+max-width: 840px;
+line-height: 1.6;
+margin-bottom: 2.5rem;
+}
+
+/* Stats Bar */
+.stats-bar {
+position: relative;
+z-index: 10;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+gap: 1.5rem;
+max-width: 1200px;
+margin: -2rem auto 5rem;
+padding: 0 6%;
+}
+
+.stat-card {
+background: var(--glass-bg);
+border: 1px solid var(--glass-border);
+backdrop-filter: blur(20px);
+padding: 1.75rem;
+border-radius: 12px;
+text-align: center;
+}
+
+.stat-number {
+font-family: 'Space Grotesk', sans-serif;
+font-size: 2.2rem;
+font-weight: 700;
+color: var(--accent-green);
+margin-bottom: 0.25rem;
+}
+
+.stat-label {
+font-size: 0.85rem;
+color: var(--text-muted);
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+/* Section Commons */
+.section-container {
+position: relative;
+z-index: 10;
+padding: 6rem 6%;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.section-header {
+text-align: center;
+margin-bottom: 4rem;
+}
+
+.section-tag {
+color: var(--accent-cyan);
+font-size: 0.85rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 2px;
+margin-bottom: 0.5rem;
+}
+
+.section-title {
+font-family: 'Space Grotesk', sans-serif;
+font-size: 2.2rem;
+font-weight: 700;
+color: #fff;
+}
+
+/* Product Highlight: EduAttend.AI */
+.product-card {
+background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(3, 7, 18, 0.95) 100%);
+border: 1px solid rgba(16, 185, 129, 0.3);
+backdrop-filter: blur(20px);
+border-radius: 16px;
+padding: 3.5rem;
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 3rem;
+align-items: center;
+}
+
+.product-content h3 {
+font-family: 'Space Grotesk', sans-serif;
+font-size: 2rem;
+color: #fff;
+margin-bottom: 1rem;
+}
+
+.product-content h3 span { color: var(--accent-green); }
+
+.product-content p {
+color: var(--text-muted);
+line-height: 1.6;
+margin-bottom: 1.5rem;
+}
+
+.feature-list {
+list-style: none;
+display: flex;
+flex-direction: column;
+gap: 0.8rem;
+}
+
+.feature-list li {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+font-size: 0.95rem;
+color: var(--text-main);
+}
+
+.feature-list li::before {
+content: "✓";
+color: var(--accent-green);
+font-weight: bold;
+}
+
+/* Calculator Section */
+.calculator-card {
+background: var(--glass-bg);
+border: 1px solid var(--glass-border);
+backdrop-filter: blur(20px);
+border-radius: 16px;
+padding: 3rem;
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 3rem;
+align-items: center;
+}
+
+.calc-controls {
+display: flex;
+flex-direction: column;
+gap: 1.5rem;
+}
+
+.slider-group label {
+display: flex;
+justify-content: space-between;
+font-size: 0.95rem;
+color: var(--text-main);
+margin-bottom: 0.5rem;
+}
+
+.slider-group input[type="range"] {
+width: 100%;
+height: 6px;
+background: rgba(255, 255, 255, 0.1);
+border-radius: 3px;
+outline: none;
+accent-color: var(--accent-green);
+}
+
+.calc-display {
+background: rgba(3, 7, 18, 0.85);
+border: 1px solid rgba(16, 185, 129, 0.3);
+border-radius: 12px;
+padding: 2.5rem;
+text-align: center;
+}
+
+.calc-display h4 {
+color: var(--text-muted);
+font-size: 0.9rem;
+text-transform: uppercase;
+margin-bottom: 0.5rem;
+}
+
+.calc-display .savings-value {
+font-family: 'Space Grotesk', sans-serif;
+font-size: 3rem;
+font-weight: 700;
+color: var(--accent-green);
+margin-bottom: 1rem;
+}
+
+/* Lead Portal Section */
+.portal-card {
+background: linear-gradient(180deg, rgba(15, 23, 42, 0.85) 0%, rgba(3, 7, 18, 0.95) 100%);
+border: 1px solid rgba(16, 185, 129, 0.3);
+backdrop-filter: blur(24px);
+border-radius: 20px;
+padding: 3.5rem;
+box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+max-width: 850px;
+margin: 0 auto;
+}
+
+.form-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 1.5rem;
+}
+
+.full-width { grid-column: span 2; }
+
+.form-field {
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+}
+
+.form-field label {
+font-size: 0.85rem;
+font-weight: 600;
+color: var(--text-muted);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.form-field input, .form-field select, .form-field textarea {
+background: rgba(3, 7, 18, 0.7);
+border: 1px solid var(--glass-border);
+padding: 0.9rem 1.1rem;
+border-radius: 8px;
+color: #fff;
+font-family: inherit;
+font-size: 0.95rem;
+}
+
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+outline: none;
+border-color: var(--accent-green);
+box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+}
+
+.submit-btn {
+width: 100%;
+background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+color: #030712;
+padding: 1.1rem;
+border: none;
+border-radius: 8px;
+font-family: 'Space Grotesk', sans-serif;
+font-size: 1.05rem;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.3s;
+}
+
+.submit-btn:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
+}
+
+footer {
+position: relative;
+z-index: 10;
+text-align: center;
+padding: 3rem 6%;
+border-top: 1px solid var(--glass-border);
+color: var(--text-muted);
+font-size: 0.85rem;
+}
+
+@media (max-width: 900px) {
+.nav-center { display: none; }
+.product-card, .calculator-card { grid-template-columns: 1fr; }
+.form-grid { grid-template-columns: 1fr; }
+.full-width { grid-column: span 1; }
+.portal-card { padding: 2rem 1.5rem; }
+}
+</style>
 </head>
 <body>
-<!-- Loading Screen -->
-<div id="loader">
-<div class="loader-content">
-<div class="loader-logo">R</div>
-<div class="loader-bar"><div class="loader-progress"></div></div>
-<p class="loader-text">Initializing Gov-Tech Stack...</p>
-</div>
-</div>
 
-<!-- Navigation -->
-<nav id="navbar">
-<div class="nav-container">
-<a href="#" class="logo">
-<span class="logo-icon">◈</span>
-<span class="logo-text">Rethinkables</span>
-</a>
-<ul class="nav-links">
-<li><a href="#mission" class="nav-link">Mission</a></li>
-<li><a href="#services" class="nav-link">Services</a></li>
-<li><a href="#product" class="nav-link">EduAttend.ai</a></li>
-<li><a href="#impact" class="nav-link">Impact</a></li>
-<li><a href="#contact" class="nav-link">Contact</a></li>
-</ul>
-<a href="#contact" class="btn btn-primary nav-cta">Let's Talk</a>
-<button class="mobile-toggle" aria-label="Toggle menu">
-<span></span><span></span><span></span>
-</button>
-</div>
+<!-- 3D Canvas Background -->
+<div id="webgl-canvas"></div>
+
+<!-- Navigation Header -->
+<header>
+<a href="#" class="brand-logo">RETHINKABLES <span>TECH</span></a>
+<nav class="nav-center">
+<a href="#solutions">Solutions</a>
+<a href="#eduattend">EduAttend.AI</a>
+<a href="#risk-reversal">Capex vs SaaS</a>
+<a href="#portal">Officer Portal</a>
 </nav>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu">
-<a href="#mission" class="mobile-link">Mission</a>
-<a href="#services" class="mobile-link">Services</a>
-<a href="#product" class="mobile-link">EduAttend.ai</a>
-<a href="#impact" class="mobile-link">Impact</a>
-<a href="#contact" class="mobile-link">Contact</a>
+<div class="status-pill">
+<span class="status-dot"></span>
+<span>Gov-Tech Active</span>
 </div>
+</header>
 
 <!-- Hero Section -->
-<section id="hero">
-<canvas id="hero-canvas"></canvas>
-<div class="hero-overlay"></div>
-<div class="hero-content">
-<div class="hero-badge">
-<span class="badge-dot"></span>
-<span>Startup India Recognized</span>
-</div>
-<h1 class="hero-title">
-<span class="line">Technology that</span>
-<span class="line accent">serves Bharat</span>
-</h1>
-<p class="hero-subtitle">
-We partner with government officers to build ground-up tech solutions
-that actually work in rural India — starting with attendance in government schools.
-</p>
-<div class="hero-cta-group">
-<a href="#product" class="btn btn-primary btn-lg">
-<span>Explore EduAttend.ai</span>
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-</a>
-<a href="#contact" class="btn btn-outline btn-lg">Schedule a Demo</a>
-</div>
-<div class="hero-stats">
-<div class="stat">
-<span class="stat-num" data-target="50000">0</span>
-<span class="stat-label">Students Tracked</span>
-</div>
-<div class="stat">
-<span class="stat-num" data-target="200">0</span>
-<span class="stat-label">Schools Onboarded</span>
-</div>
-<div class="stat">
-<span class="stat-num" data-target="15">0</span>
-<span class="stat-label">Districts Covered</span>
-</div>
-</div>
-</div>
-<div class="scroll-indicator">
-<div class="scroll-mouse">
-<div class="scroll-wheel"></div>
-</div>
-<span>Scroll to explore</span>
-</div>
+<section class="hero-container">
+<div class="badge-startup">Startup India Recognized Gov-Tech Consultancy</div>
+<h1 class="hero-title">Zero-Capex Field Intelligence & Custom SaaS for Public Sector</h1>
+<p class="hero-subtitle">We eliminate financial risk from public sector technology adoption. Deploy custom, audit-ready operational platforms with zero upfront software cost. Paid purely on monthly operational performance.</p>
+<a href="#portal" class="btn-primary" style="font-size: 1.1rem; padding: 1rem 2.2rem;">Request Division Blueprint</a>
 </section>
 
-<!-- Mission Section -->
-<section id="mission" class="section">
-<div class="container">
+<!-- Key Metrics Bar -->
+<div class="stats-bar">
+<div class="stat-card">
+<div class="stat-number">₹0</div>
+<div class="stat-label">Upfront Software Cost</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">100%</div>
+<div class="stat-label">Audit & Compliance Trail</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">36 Months</div>
+<div class="stat-label">Long-Term Tender Support</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">Pay-Per-Use</div>
+<div class="stat-label">Monthly Subscription Model</div>
+</div>
+</div>
+
+<!-- Flagship Product: EduAttend.AI -->
+<section class="section-container" id="eduattend">
 <div class="section-header">
-<span class="section-tag">01 — Our Mission</span>
-<h2 class="section-title">Built with officers.<br>Designed for the field.</h2>
+<div class="section-tag">Flagship Gov-Tech Platform</div>
+<h2 class="section-title">EduAttend.AI — Intelligent Field & Education Attendance</h2>
 </div>
-<div class="mission-grid">
-<div class="mission-card" data-reveal>
-<div class="mission-icon">
-<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="24" r="20"/><path d="M24 14v10l7 7"/></svg>
+
+<div class="product-card">
+<div class="product-content">
+<h3>EduAttend<span>.AI</span></h3>
+<p>Designed specifically for schools, educational departments, and administrative field units across India. Built for ground adoption under tough field conditions with zero digital friction.</p>
+<ul class="feature-list">
+<li>AI-Powered Anti-Spoof Facial Verification</li>
+<li>Low-Connectivity & Offline Sync Capability</li>
+<li>Real-time SDO & Administrative Reporting Dashboards</li>
+<li>Zero Capital Expenditure — Monthly Subscription Billing</li>
+</ul>
 </div>
-<h3>Understand First</h3>
-<p>We spend weeks on the ground with government officers before writing a single line of code. The problem is understood, not assumed.</p>
-</div>
-<div class="mission-card" data-reveal>
-<div class="mission-icon">
-<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="8" width="32" height="32" rx="4"/><path d="M8 20h32M20 8v32"/></svg>
-</div>
-<h3>Build for Reality</h3>
-<p>No internet? No problem. Our apps work offline and sync when connectivity returns. Built for rural India's actual infrastructure.</p>
-</div>
-<div class="mission-card" data-reveal>
-<div class="mission-icon">
-<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 4l6 12 13 2-10 9 3 13-12-7-12 7 3-13-10-9 13-2z"/></svg>
-</div>
-<h3>Deliver Impact</h3>
-<p>We measure success by government outcomes — not vanity metrics. Every product is co-owned with the department that uses it.</p>
-</div>
+<div style="background: rgba(3, 7, 18, 0.8); border: 1px solid var(--glass-border); border-radius: 12px; padding: 2.5rem; text-align: center;">
+<div style="font-size: 3rem; margin-bottom: 1rem;">📱⚡</div>
+<h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1.2rem;">Ground Adoption First</h4>
+<p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">Eliminates field worker rejection through effortless UI, tamper-proof logs, and instant district level telemetry.</p>
 </div>
 </div>
 </section>
 
-<!-- Services Section -->
-<section id="services" class="section section-dark">
-<div class="container">
+<!-- Public Risk & Financial Calculator Section -->
+<section class="section-container" id="risk-reversal">
 <div class="section-header">
-<span class="section-tag">02 — What We Do</span>
-<h2 class="section-title">End-to-end gov-tech<br>consultancy & SaaS</h2>
+<div class="section-tag">Public Fund Risk Reversal</div>
+<h2 class="section-title">Compare Capex Tenders vs. SaaS Subscription</h2>
 </div>
-<div class="services-list">
-<div class="service-item" data-reveal>
-<div class="service-num">01</div>
-<div class="service-content">
-<h3>Problem Discovery</h3>
-<p>Embedded research with government departments to identify pain points that technology can actually solve. We don't sell solutions looking for problems.</p>
-<div class="service-tags">
-<span>Field Research</span>
-<span>Stakeholder Interviews</span>
-<span>Feasibility Study</span>
+
+<div class="calculator-card">
+<div class="calc-controls">
+<div class="slider-group">
+<label><span>Field Personnel / Units Covered</span> <strong id="units-val">500</strong></label>
+<input type="range" id="units-slider" min="100" max="5000" step="100" value="500">
 </div>
+<div class="slider-group">
+<label><span>Contract Duration (Months)</span> <strong id="months-val">36</strong></label>
+<input type="range" id="months-slider" min="6" max="36" step="6" value="36">
 </div>
+<p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">*Under traditional tender models, public funds are locked upfront. With Rethinkables Tech, software payment is strictly operational SaaS, completely eliminating audit risks.</p>
 </div>
-<div class="service-item" data-reveal>
-<div class="service-num">02</div>
-<div class="service-content">
-<h3>Custom SaaS Development</h3>
-<p>Full-stack product engineering with offline-first architecture, vernacular language support, and government-grade security compliance.</p>
-<div class="service-tags">
-<span>Offline-First</span>
-<span>Vernacular UI</span>
-<span>CERT-In Compliant</span>
-</div>
-</div>
-</div>
-<div class="service-item" data-reveal>
-<div class="service-num">03</div>
-<div class="service-content">
-<h3>On-Ground Implementation</h3>
-<p>Training, change management, and handholding support for field staff. We don't just deploy — we ensure adoption.</p>
-<div class="service-tags">
-<span>Teacher Training</span>
-<span>Helpdesk Support</span>
-<span>Data Migration</span>
-</div>
-</div>
-</div>
-<div class="service-item" data-reveal>
-<div class="service-num">04</div>
-<div class="service-content">
-<h3>Policy & Scale Advisory</h3>
-<p>Helping departments write RFPs, evaluate vendors, and scale successful pilots into statewide programs.</p>
-<div class="service-tags">
-<span>RFP Design</span>
-<span>Vendor Evaluation</span>
-<span>Scale Strategy</span>
-</div>
-</div>
-</div>
+<div class="calc-display">
+<h4>Upfront Capital at Risk</h4>
+<div class="savings-value">₹0.00</div>
+<p style="font-size: 0.9rem; color: var(--accent-green); font-weight: 600;">100% Audit & Financial Risk Protection</p>
 </div>
 </div>
 </section>
 
-<!-- Product Section: EduAttend.ai -->
-<section id="product" class="section">
-<div class="container">
-<div class="product-hero">
-<div class="product-badge">
-<span class="badge-pulse"></span>
-<span>Flagship Product</span>
-</div>
-<h2 class="product-title">EduAttend.ai</h2>
-<p class="product-subtitle">Attendance tracking for rural government schools — works entirely offline, designed with teachers.</p>
+<!-- Officer Consultation Command Portal -->
+<section class="section-container" id="portal">
+<div class="portal-card">
+<div style="text-align: center; margin-bottom: 2.5rem;">
+<div class="section-tag">Direct Official Channel</div>
+<h2 class="section-title" style="font-size: 2rem;">Departmental Solution Portal</h2>
+<p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">For IAS Officers, Policy Makers, SDOs, and Departmental Heads.</p>
 </div>
 
-<div class="product-showcase">
-<div class="product-visual" data-reveal>
-<div class="phone-mockup">
-<div class="phone-frame">
-<div class="phone-screen">
-<div class="app-header">
-<span class="app-logo">📚 EduAttend</span>
-<span class="app-status">● Offline</span>
-</div>
-<div class="app-body">
-<div class="app-class">Class 5-A • 32 Students</div>
-<div class="attendance-list">
-<div class="att-row present"><span class="att-name">Aarav Kumar</span><span class="att-check">✓</span></div>
-<div class="att-row present"><span class="att-name">Priya Sharma</span><span class="att-check">✓</span></div>
-<div class="att-row absent"><span class="att-name">Rahul Verma</span><span class="att-cross">✕</span></div>
-<div class="att-row present"><span class="att-name">Sneha Patel</span><span class="att-check">✓</span></div>
-<div class="att-row present"><span class="att-name">Vikram Rao</span><span class="att-check">✓</span></div>
-</div>
-<div class="app-summary">
-<div class="sum-item"><span>Present</span><strong>28</strong></div>
-<div class="sum-item"><span>Absent</span><strong>4</strong></div>
-</div>
-<button class="app-btn">Mark Attendance Complete</button>
-</div>
-</div>
-</div>
-<div class="phone-reflection"></div>
-</div>
-</div>
-<div class="product-features">
-<div class="feature-item" data-reveal>
-<div class="feature-icon">📡</div>
-<h4>100% Offline Capable</h4>
-<p>Mark attendance without any internet. Data syncs automatically when the teacher gets connectivity.</p>
-</div>
-<div class="feature-item" data-reveal>
-<div class="feature-icon">🗣️</div>
-<h4>Vernacular First</h4>
-<p>Interface in Hindi and regional languages. Voice-enabled for teachers with limited literacy.</p>
-</div>
-<div class="feature-item" data-reveal>
-<div class="feature-icon">📊</div>
-<h4>Real-time Dashboards</h4>
-<p>Block and district officers see live attendance trends, dropout alerts, and school performance.</p>
-</div>
-<div class="feature-item" data-reveal>
-<div class="feature-icon">🔒</div>
-<h4>Government-Grade Security</h4>
-<p>Data stays in India. End-to-end encryption. Role-based access for every stakeholder.</p>
-</div>
-</div>
+<form id="govForm">
+<div class="form-grid">
+<div class="form-field">
+<label>Officer Full Name & Designation</label>
+<input type="text" placeholder="e.g., Shri Rajesh Kumar, IAS / SDO" required>
 </div>
 
-<div class="tech-stack" data-reveal>
-<span class="tech-label">Built with</span>
-<div class="tech-items">
-<span class="tech-item">React Native</span>
-<span class="tech-item">Node.js</span>
-<span class="tech-item">PostgreSQL</span>
-<span class="tech-item">AWS India</span>
-<span class="tech-item">Redis</span>
+<div class="form-field">
+<label>Department / Ministry</label>
+<input type="text" placeholder="e.g., Dept of Education / Administration" required>
+</div>
+
+<div class="form-field">
+<label>District / Administrative Division</label>
+<input type="text" placeholder="e.g., Lucknow Division, Uttar Pradesh" required>
+</div>
+
+<div class="form-field">
+<label>Official Email / Contact Details</label>
+<input type="text" placeholder="officer@nic.in or Mobile" required>
+</div>
+
+<div class="form-field full-width">
+<label>Primary Administrative Challenge</label>
+<select required>
+<option value="">-- Select Field Operational Hurdle --</option>
+<option value="attendance">Ground Field Adoption & EduAttend.AI Attendance Verification</option>
+<option value="telemetry">Lack of Real-time Operational Telemetry</option>
+<option value="digitization">Legacy Process Digitization & Workflow Automation</option>
+<option value="tender-risk">Eliminating Software Procurement Capital Risk</option>
+</select>
+</div>
+
+<div class="form-field full-width">
+<label>Specific Field Problem Statement</label>
+<textarea rows="4" placeholder="Detail the ground realities or specific problem statement facing field support staff..."></textarea>
+</div>
+
+<div class="full-width">
+<button type="submit" class="submit-btn">Generate Departmental SaaS Blueprint</button>
 </div>
 </div>
+</form>
 </div>
 </section>
 
-<!-- Impact Section -->
-<section id="impact" class="section section-dark">
-<div class="container">
-<div class="section-header">
-<span class="section-tag">03 — Impact</span>
-<h2 class="section-title">Numbers that matter<br>to government</h2>
-</div>
-<div class="impact-grid">
-<div class="impact-card large" data-reveal>
-<div class="impact-number">
-<span class="counter" data-target="99.2">0</span>%
-</div>
-<p class="impact-label">Attendance Capture Rate</p>
-<p class="impact-desc">Up from 73% with manual registers. Teachers complete marking in under 3 minutes.</p>
-</div>
-<div class="impact-card" data-reveal>
-<div class="impact-number">
-<span class="counter" data-target="45">0</span>%
-</div>
-<p class="impact-label">Reduction in Data Entry Time</p>
-</div>
-<div class="impact-card" data-reveal>
-<div class="impact-number">
-<span class="counter" data-target="0">0</span>
-</div>
-<p class="impact-label">Internet Required</p>
-</div>
-<div class="impact-card" data-reveal>
-<div class="impact-number">
-<span class="counter" data-target="12">0</span>
-</div>
-<p class="impact-label">Government Partners</p>
-</div>
-<div class="impact-card wide" data-reveal>
-<div class="impact-quote">
-<svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"/></svg>
-<p>"EduAttend transformed how we monitor school attendance. For the first time, we have real data from every school in the block — not just the ones with good internet."</p>
-<div class="quote-author">
-<strong>Block Education Officer</strong>
-<span>Government of [State], India</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- Process Section -->
-<section id="process" class="section">
-<div class="container">
-<div class="section-header">
-<span class="section-tag">04 — How We Work</span>
-<h2 class="section-title">From problem to<br>production in 90 days</h2>
-</div>
-<div class="process-timeline">
-<div class="process-line"></div>
-<div class="process-step" data-reveal>
-<div class="process-dot">1</div>
-<div class="process-content">
-<h4>Week 1–2: Discovery</h4>
-<p>Field visits, officer interviews, and problem validation. We co-create the scope with your department.</p>
-</div>
-</div>
-<div class="process-step" data-reveal>
-<div class="process-dot">2</div>
-<div class="process-content">
-<h4>Week 3–6: Design & Prototype</h4>
-<p>Wireframes in vernacular. Teacher feedback loops. Offline architecture design.</p>
-</div>
-</div>
-<div class="process-step" data-reveal>
-<div class="process-dot">3</div>
-<div class="process-content">
-<h4>Week 7–10: Build & Test</h4>
-<p>Agile sprints with weekly demos. Security audit. Load testing for scale.</p>
-</div>
-</div>
-<div class="process-step" data-reveal>
-<div class="process-dot">4</div>
-<div class="process-content">
-<h4>Week 11–12: Deploy & Train</h4>
-<p>Pilot in 5 schools. Teacher training. Handover to department IT cell.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- CTA / Contact Section -->
-<section id="contact" class="section section-cta">
-<div class="container">
-<div class="cta-content" data-reveal>
-<h2>Have a problem that<br>technology could solve?</h2>
-<p>We work exclusively with government departments and public sector units. Let's build something that actually works on the ground.</p>
-<div class="cta-buttons">
-<a href="mailto:hello@rethinkables.in" class="btn btn-primary btn-lg">
-<span>hello@rethinkables.in</span>
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-</a>
-<a href="tel:+919999999999" class="btn btn-outline btn-lg">+91 99999 99999</a>
-</div>
-<div class="cta-meta">
-<div class="meta-item">
-<span class="meta-dot green"></span>
-<span>Startup India Recognized</span>
-</div>
-<div class="meta-item">
-<span class="meta-dot blue"></span>
-<span>Headquartered in India</span>
-</div>
-<div class="meta-item">
-<span class="meta-dot orange"></span>
-<span>Data Sovereignty Compliant</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- Footer -->
-<footer class="footer">
-<div class="container">
-<div class="footer-grid">
-<div class="footer-brand">
-<a href="#" class="logo">
-<span class="logo-icon">◈</span>
-<span class="logo-text">Rethinkables</span>
-</a>
-<p>Gov-tech consultancy & SaaS for the Indian public sector. Built with empathy. Designed for scale.</p>
-<div class="footer-badges">
-<span class="startup-badge">🇮🇳 Startup India</span>
-</div>
-</div>
-<div class="footer-links">
-<h5>Company</h5>
-<a href="#mission">Mission</a>
-<a href="#services">Services</a>
-<a href="#product">EduAttend.ai</a>
-<a href="#impact">Impact</a>
-</div>
-<div class="footer-links">
-<h5>Product</h5>
-<a href="#product">Features</a>
-<a href="#product">Tech Stack</a>
-<a href="#contact">Request Demo</a>
-<a href="#contact">Pricing</a>
-</div>
-<div class="footer-links">
-<h5>Connect</h5>
-<a href="mailto:hello@rethinkables.in">hello@rethinkables.in</a>
-<a href="https://linkedin.com/company/rethinkables" target="_blank">LinkedIn</a>
-<a href="https://twitter.com/rethinkables" target="_blank">Twitter / X</a>
-</div>
-</div>
-<div class="footer-bottom">
-<p>© 2026 Rethinkables Technologies Pvt. Ltd. All rights reserved.</p>
-<p>Made with ❤️ for Bharat</p>
-</div>
-</div>
+<footer>
+<p>&copy; 2026 Rethinkables Technology Private Limited. Confidential Public Sector Portal.</p>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<!-- Three.js Interactive WebGL Script -->
+<script>
+const container = document.getElementById('webgl-canvas');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+container.appendChild(renderer.domElement);
+
+const globeGroup = new THREE.Group();
+scene.add(globeGroup);
+
+const sphereGeo = new THREE.IcosahedronGeometry(2.8, 10);
+const sphereMat = new THREE.MeshBasicMaterial({
+color: 0x10b981,
+wireframe: true,
+transparent: true,
+opacity: 0.15
+});
+const globeWire = new THREE.Mesh(sphereGeo, sphereMat);
+globeGroup.add(globeWire);
+
+const particleGeo = new THREE.BufferGeometry();
+const particleCount = 400;
+const posArray = new Float32Array(particleCount * 3);
+
+for(let i = 0; i < particleCount * 3; i++) {
+posArray[i] = (Math.random() - 0.5) * 8;
+}
+
+particleGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+const particleMat = new THREE.PointsMaterial({
+size: 0.03,
+color: 0x06b6d4,
+transparent: true,
+opacity: 0.75
+});
+
+const particleMesh = new THREE.Points(particleGeo, particleMat);
+globeGroup.add(particleMesh);
+
+camera.position.z = 6.5;
+
+let mouseX = 0, mouseY = 0;
+document.addEventListener('mousemove', (e) => {
+mouseX = (e.clientX - window.innerWidth / 2) * 0.0003;
+mouseY = (e.clientY - window.innerHeight / 2) * 0.0003;
+});
+
+function animate() {
+requestAnimationFrame(animate);
+globeGroup.rotation.y += 0.002;
+globeGroup.rotation.x += 0.001;
+globeGroup.rotation.y += (mouseX - globeGroup.rotation.y) * 0.05;
+globeGroup.rotation.x += (mouseY - globeGroup.rotation.x) * 0.05;
+renderer.render(scene, camera);
+}
+
+animate();
+
+window.addEventListener('resize', () => {
+camera.aspect = window.innerWidth / window.innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Interactive Risk Calculator Logic
+const unitsSlider = document.getElementById('units-slider');
+const monthsSlider = document.getElementById('months-slider');
+const unitsVal = document.getElementById('units-val');
+const monthsVal = document.getElementById('months-val');
+
+function updateCalculator() {
+unitsVal.textContent = unitsSlider.value;
+monthsVal.textContent = monthsSlider.value;
+}
+
+unitsSlider.addEventListener('input', updateCalculator);
+monthsSlider.addEventListener('input', updateCalculator);
+
+// Form Submit
+document.getElementById('govForm').addEventListener('submit', function(e) {
+e.preventDefault();
+alert('Consultation Blueprint Request Received. A senior solution strategist from Rethinkables Technology will contact your office within 24 hours.');
+this.reset();
+});
+</script>
 </body>
 </html>
