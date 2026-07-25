@@ -1,30 +1,32 @@
 /* ==========================================================================
-   1. DESIGN SYSTEM & COLOR TOKENS
+   1. COLOR PALETTE & DESIGN SYSTEM (MATCHING ORIGINAL SCREENSHOT)
    ========================================================================== */
 :root {
-  --bg-cream: #F7F5EE;           /* Warm main background */
-  --bg-card: #F2EFE6;            /* Subtle card fill */
+  --bg-cream: #F6F4ED;           /* Soft off-white / warm cream main bg */
+  --bg-value-card: rgba(255, 255, 255, 0.7); /* Upper value proposition cards */
+  --bg-product-card: #EFECE3;    /* Distinct warm beige product card fill */
   --bg-surface: #FFFFFF;
   
-  --text-dark: #121811;          /* Dark main text */
-  --text-muted: #4A5568;         /* Subtitle gray */
-  --color-teal: #023A2E;         /* Signature dark teal */
-  --color-teal-hover: #012820;
-  --color-teal-light: #D0E7DF;   /* Light green tag fill */
+  --text-dark: #11181C;          /* Crisp main body text */
+  --text-muted: #52606D;         /* Secondary gray */
+  --color-dark-green: #00382B;   /* Deep GovTech green */
   
-  --color-amber: #C27803;        /* Underline & accent orange */
-  --color-amber-bg: #F5E9CE;     /* Yellow notice banner bg */
+  --color-amber: #D97706;        /* Orange/amber badge & title accent */
+  --color-amber-bg: #F5E8CB;     /* Warm pill banner background */
   
-  --border-dark: #023A2E;
+  --color-tag-green-bg: #D9ECE3; /* Soft green tag background */
+  --color-tag-green-text: #0F523E;
+  
   --border-subtle: #E2DDD0;
+  --border-card: #E0DACB;
 
   --font-serif: 'Newsreader', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
   --font-mono: 'Space Mono', monospace;
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
 }
 
 /* ==========================================================================
-   2. GLOBAL RESET
+   2. GLOBAL RESET & LAYOUT
    ========================================================================== */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -49,11 +51,10 @@ body {
 }
 
 .container {
-  width: min(100% - 2.5rem, 1140px);
+  width: min(100% - 3rem, 1160px);
   margin-inline: auto;
 }
 
-/* Ambient Canvas Background */
 #field {
   position: absolute;
   top: 0;
@@ -65,7 +66,7 @@ body {
 }
 
 /* ==========================================================================
-   3. BRAND LOGO & NAVBAR
+   3. BRAND LOGO & NAVBAR (MATCHED TO SCREENSHOT)
    ========================================================================== */
 .navbar {
   position: relative;
@@ -73,12 +74,6 @@ body {
   background-color: transparent;
   padding: 1.25rem 0;
   border-bottom: 1px solid var(--border-subtle);
-  transition: background-color 0.3s ease;
-}
-
-.navbar.scrolled {
-  background-color: rgba(247, 245, 238, 0.95);
-  backdrop-filter: blur(8px);
 }
 
 .nav-container {
@@ -90,37 +85,38 @@ body {
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.75rem;
   text-decoration: none;
 }
 
 .brand-icon {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--color-teal);
+  font-family: var(--font-sans);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-dark);
   line-height: 1;
 }
 
-.brand-text {
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: var(--text-dark);
+.brand-text-group {
   display: flex;
-  align-items: baseline;
-  gap: 0.4rem;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.brand-name {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  letter-spacing: -0.02em;
 }
 
 .brand-sub {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--color-teal);
-  background: var(--color-teal-light);
-  padding: 2px 6px;
-  border-radius: 2px;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
 }
 
 .nav-links {
@@ -137,12 +133,12 @@ body {
 }
 
 /* ==========================================================================
-   4. HERO & SECTIONS
+   4. HERO SECTION & TYPOGRAPHY
    ========================================================================== */
 .hero-section {
   position: relative;
   z-index: 5;
-  padding: 3.5rem 0 3rem 0;
+  padding: 4rem 0 3.5rem 0;
 }
 
 .tags-wrapper {
@@ -154,28 +150,33 @@ body {
 
 .tag {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-teal);
-  background-color: transparent;
-  border: 1px solid var(--border-subtle);
-  padding: 0.3rem 0.65rem;
+  padding: 0.35rem 0.65rem;
   border-radius: 2px;
 }
 
+.tag-green {
+  background-color: var(--color-tag-green-bg);
+  color: var(--color-tag-green-text);
+  border: 1px solid rgba(15, 82, 62, 0.2);
+}
+
 .tag-muted {
+  background-color: rgba(255, 255, 255, 0.6);
   color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
 }
 
 .hero-title {
   font-family: var(--font-serif);
-  font-size: clamp(2.6rem, 5.2vw, 4.2rem);
-  line-height: 1.1;
+  font-size: clamp(2.8rem, 5.5vw, 4.4rem);
+  line-height: 1.08;
   font-weight: 600;
   color: var(--text-dark);
-  max-width: 900px;
+  max-width: 920px;
   letter-spacing: -0.01em;
   margin-bottom: 1.5rem;
 }
@@ -187,18 +188,18 @@ body {
 }
 
 .hero-description {
-  font-size: 1.15rem;
+  font-size: 1.18rem;
   line-height: 1.6;
   color: var(--text-muted);
-  max-width: 780px;
-  margin-bottom: 1.75rem;
+  max-width: 800px;
+  margin-bottom: 2rem;
 }
 
 .trust-badges {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--color-teal);
-  margin-bottom: 1.75rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
 }
 
 .banner-pill {
@@ -208,80 +209,52 @@ body {
   background-color: var(--color-amber-bg);
   color: #5B3A00;
   padding: 0.65rem 1.25rem;
-  border: 1px solid #E4D0A2;
+  border: 1px solid #E8D8B5;
   border-radius: 4px;
   font-family: var(--font-mono);
   font-size: 0.82rem;
   margin-bottom: 2.25rem;
 }
 
-/* Value Props Bar */
+/* ==========================================================================
+   5. CARDS (VALUE BAR & SAAS PORTFOLIO)
+   ========================================================================== */
 .value-bar {
   position: relative;
   z-index: 5;
-  background-color: var(--bg-surface);
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
-  padding: 3rem 0;
+  padding: 2.5rem 0;
 }
 
 .grid { display: grid; gap: 1.5rem; }
-.grid-cols-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.grid-cols-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+/* Upper Value Prop Cards */
+.value-card {
+  background-color: var(--bg-value-card);
+  border: 1px solid var(--border-card);
+  border-radius: 4px;
+  padding: 2rem;
+  backdrop-filter: blur(4px);
+}
 
 .value-card h3 {
   font-family: var(--font-serif);
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
 }
 
 .value-card p {
   color: var(--text-muted);
   font-size: 0.95rem;
+  line-height: 1.6;
 }
 
-/* ==========================================================================
-   5. BUTTONS & CARDS
-   ========================================================================== */
-.btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.85rem 1.6rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  border-radius: 4px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-teal {
-  background-color: var(--color-teal);
-  color: #FFFFFF;
-  border: 1px solid var(--color-teal);
-}
-
-.btn-teal:hover { background-color: var(--color-teal-hover); }
-
-.btn-outline-dark {
-  background-color: transparent;
-  color: var(--text-dark);
-  border: 1px solid var(--text-dark);
-}
-
-.btn-outline-teal {
-  border: 1px solid var(--color-teal);
-  color: var(--color-teal);
-  background: transparent;
-  padding: 0.4rem 1rem;
-}
-
+/* Lower SaaS Product Cards (Matched to Screenshot) */
 .portfolio-section, .how-section, .vision-section {
   position: relative;
   z-index: 5;
-  padding: 4rem 0 5rem 0;
+  padding: 4.5rem 0;
   border-top: 1px solid var(--border-subtle);
 }
 
@@ -291,38 +264,32 @@ body {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-teal);
+  color: var(--text-muted);
   margin-bottom: 0.5rem;
   display: block;
 }
 
 .section-title {
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-size: clamp(2.2rem, 3.8vw, 3rem);
   font-weight: 600;
   margin-bottom: 2.5rem;
 }
 
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-.card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+.product-card {
+  background-color: var(--bg-product-card);
+  border: 1px solid var(--border-card);
   border-radius: 4px;
-  padding: 2rem;
+  padding: 2.25rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.card:hover {
+.product-card:hover {
   transform: translateY(-4px);
-  border-color: var(--color-teal);
+  border-color: var(--text-dark);
 }
 
 .card-badge {
@@ -330,24 +297,38 @@ body {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   font-weight: 700;
-  padding: 0.25rem 0.55rem;
-  margin-bottom: 1.25rem;
+  padding: 0.3rem 0.6rem;
+  margin-bottom: 1.5rem;
   border-radius: 2px;
+  letter-spacing: 0.05em;
 }
 
-.badge-amber { background-color: #D97706; color: #FFFFFF; }
-.badge-teal { background-color: var(--color-teal-light); color: var(--color-teal); border: 1px solid var(--color-teal); }
-.badge-teal-light { background-color: #E2ECE9; color: var(--text-muted); }
+.badge-amber { background-color: var(--color-amber); color: #FFFFFF; }
+.badge-green-muted { background-color: #D3E4DB; color: #1E4D3A; border: 1px solid #B2CFC0; }
+.badge-gray-muted { background-color: #E2DFD5; color: var(--text-muted); }
 
-.card h3 { font-family: var(--font-serif); font-size: 2.1rem; font-weight: 600; margin-bottom: 0.75rem; }
-.card h3 span { color: var(--color-amber); }
-.card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.75rem; }
+.product-title {
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--text-dark);
+}
+
+.title-accent { color: var(--color-amber); }
+
+.product-card p {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
 
 .card-action {
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  color: var(--color-teal);
+  color: var(--color-dark-green);
   background: none;
   border: none;
   cursor: pointer;
@@ -355,6 +336,40 @@ body {
   align-items: center;
   gap: 0.4rem;
 }
+
+/* ==========================================================================
+   6. BUTTONS & MODAL OVERLAY
+   ========================================================================== */
+.btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-dark {
+  background-color: var(--text-dark);
+  color: #FFFFFF;
+  border: 1px solid var(--text-dark);
+}
+
+.btn-dark:hover { background-color: #000000; }
+
+.btn-outline-dark {
+  background-color: transparent;
+  color: var(--text-dark);
+  border: 1px solid var(--text-dark);
+}
+
+.btn-outline-dark:hover { background-color: rgba(0, 0, 0, 0.04); }
 
 .step-num {
   font-family: var(--font-mono);
@@ -365,9 +380,9 @@ body {
 }
 
 .vision-box {
-  background: var(--bg-card);
-  border: 1px solid var(--border-dark);
-  padding: 3rem;
+  background: var(--bg-product-card);
+  border: 1px solid var(--border-card);
+  padding: 3.5rem 2rem;
   border-radius: 4px;
   text-align: center;
 }
@@ -375,31 +390,27 @@ body {
 .vision-box h2 { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 1rem; }
 .vision-box p { max-width: 700px; margin: 0 auto 2rem auto; color: var(--text-muted); font-size: 1.1rem; }
 
-/* ==========================================================================
-   6. MODAL & OVERLAY FIXES
-   ========================================================================== */
+/* Modal Display Fix */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(18, 24, 17, 0.8);
+  background: rgba(17, 24, 28, 0.8);
   backdrop-filter: blur(6px);
   z-index: 9999;
-  display: none; /* Completely hidden by default */
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 1rem;
 }
 
-.modal-overlay.active {
-  display: flex !important; /* Display only when triggered */
-}
+.modal-overlay.active { display: flex !important; }
 
 .modal-card {
   background: var(--bg-cream);
-  border: 1px solid var(--border-dark);
+  border: 1px solid var(--border-card);
   border-radius: 4px;
   padding: 2.5rem;
   max-width: 650px;
@@ -408,12 +419,6 @@ body {
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-}
-
-.modal-sub {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  margin-bottom: 1.5rem;
 }
 
 .modal-close {
@@ -428,16 +433,13 @@ body {
 }
 
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-@media (max-width: 600px) {
-  .form-grid { grid-template-columns: 1fr; }
-}
+@media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
 
 .form-group { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
-.form-group label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--color-teal); }
+.form-group label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--text-dark); }
 .form-group input, .form-group select, .form-group textarea {
   padding: 0.65rem 0.8rem;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-card);
   background: #FFFFFF;
   border-radius: 2px;
   font-family: var(--font-sans);
@@ -447,7 +449,7 @@ body {
 
 .btn-full { width: 100%; margin-top: 0.5rem; }
 
-/* Scroll Reveal Animations */
+/* Scroll Reveals */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
