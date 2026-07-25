@@ -1,7 +1,5 @@
 /* ============================================================
    The Verification Field (Ambient Three.js Canvas)
-   A slow drift of small marks — most teal (verified), a few
-   gold (flagged). The product thesis as ambient motion.
    ============================================================ */
 (function () {
   const canvas = document.getElementById('field');
