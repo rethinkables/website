@@ -3,35 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rethinkables Technology — Custom GovTech Infrastructure</title>
+  <title>Rethinkables Technology — GovTech Infrastructure Engine</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-  <!-- Link to External Stylesheet -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Three.js CDN (REQUIRED before field.js) -->
+  <!-- Three.js CDN (Required for field.js) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
-  <!-- AMBIENT THREE.JS CANVAS -->
+  <!-- THREE.JS AMBIENT BACKGROUND CANVAS -->
   <canvas id="field"></canvas>
 
-  <!-- NAVIGATION BAR -->
+  <!-- NAVBAR -->
   <header class="navbar" id="nav">
     <div class="container nav-container">
       <a href="#" class="brand">
-        <span class="brand-icon">R</span> Rethinkables
+        <span class="brand-icon">R</span> 
+        <span class="brand-text">Rethinkables <span class="brand-sub">TECHNOLOGY</span></span>
       </a>
       <nav class="nav-links">
         <a href="#portfolio">SaaS Portfolio</a>
         <a href="#how-it-works">How It Works</a>
         <a href="#vision">Platform Vision</a>
-        <a href="#contact" class="btn btn-outline-teal nav-btn open-modal-btn">Let's Build</a>
+        <button class="btn btn-outline-teal nav-btn open-modal-btn">Let's Build</button>
       </nav>
     </div>
   </header>
@@ -51,7 +51,7 @@
         </h1>
 
         <p class="hero-description reveal">
-          Rethinkables designs, builds, and deploys purpose-built operational software for public departments with zero upfront capital risk. Powered by on-device AI, offline-first architecture, and custom field workflows tailored to your specific administrative needs.
+          Rethinkables designs, builds, and deploys purpose-built operational software for government departments with zero upfront capital risk. Powered by on-device AI, offline-first architecture, and custom field workflows tailored to your specific administrative needs.
         </p>
 
         <div class="trust-badges reveal">
@@ -65,9 +65,27 @@
 
         <div class="btn-group reveal">
           <a href="#portfolio" class="btn btn-teal">Explore SaaS Suite</a>
-          <a href="#contact" class="btn btn-outline-dark open-modal-btn">Let's Build Solution Architecture</a>
+          <button class="btn btn-outline-dark open-modal-btn">Let's Build Solution Architecture</button>
         </div>
 
+      </div>
+    </section>
+
+    <!-- VALUE PROPOSITIONS BAR -->
+    <section class="value-bar">
+      <div class="container grid grid-cols-3">
+        <div class="value-card reveal">
+          <h3>₹0 Upfront Software Cost</h3>
+          <p>No multi-crore IT tender lock-in. Districts deploy custom verification infrastructure with zero capital risk.</p>
+        </div>
+        <div class="value-card reveal">
+          <h3>Pay-Per-Month SaaS</h3>
+          <p>Pay purely via predictable monthly subscriptions. Scale or pause anytime based on actual field adoption.</p>
+        </div>
+        <div class="value-card reveal">
+          <h3>100% Audit Protection</h3>
+          <p>Eliminate public fund waste. Every rupee spent is backed by tamper-evident digital logs under DPDP guidelines.</p>
+        </div>
       </div>
     </section>
 
@@ -89,7 +107,7 @@
               <h3>EduAttend<span>.AI</span></h3>
               <p>Verified classroom attendance and automated mid-day meal reconciliation for government schools. Operates 100% offline on standard smartphones.</p>
             </div>
-            <a href="#contact" class="card-action open-modal-btn">Request District Pilot &rarr;</a>
+            <button class="card-action open-modal-btn">Request District Pilot &rarr;</button>
           </div>
 
           <!-- Card 2: FieldVerify Engine -->
@@ -99,7 +117,7 @@
               <h3>FieldVerify Engine</h3>
               <p>Geotagged, tamper-evident audit logs and telemetry for Public Works, SDO Tenders, and rural infrastructure projects.</p>
             </div>
-            <a href="#contact" class="card-action open-modal-btn">Deploy Infrastructure &rarr;</a>
+            <button class="card-action open-modal-btn">Deploy Infrastructure &rarr;</button>
           </div>
 
           <!-- Card 3: BeneficiaryTrace -->
@@ -109,16 +127,113 @@
               <h3>BeneficiaryTrace</h3>
               <p>On-device verification infrastructure for MGNREGA worker presence, ASHA/ANM health visits, and scheme distribution.</p>
             </div>
-            <a href="#contact" class="card-action open-modal-btn">Explore Solution &rarr;</a>
+            <button class="card-action open-modal-btn">Explore Solution &rarr;</button>
           </div>
 
         </div>
 
       </div>
     </section>
+
+    <!-- HOW IT WORKS SECTION -->
+    <section id="how-it-works" class="how-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">FIELD ARCHITECTURE</span>
+          <h2 class="section-title">Engineered for Offline-First Public Governance</h2>
+        </div>
+
+        <div class="cards-grid">
+          <div class="card reveal">
+            <span class="step-num">01</span>
+            <h3>Zero Latency Field Capture</h3>
+            <p>Field staff capture telemetry and verification logs on basic low-cost smartphones without requiring active internet connection.</p>
+          </div>
+          <div class="card reveal">
+            <span class="step-num">02</span>
+            <h3>On-Device Integrity</h3>
+            <p>Cryptographic hashes are created on-device at the point of capture, ensuring data cannot be tampered with or retroactively altered.</p>
+          </div>
+          <div class="card reveal">
+            <span class="step-num">03</span>
+            <h3>Automated Audit Stream</h3>
+            <p>Once connectivity is restored, verified logs auto-sync to departmental dashboards, generating audit-ready compliance trails.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLATFORM VISION SECTION -->
+    <section id="vision" class="vision-section">
+      <div class="container">
+        <div class="vision-box reveal">
+          <span class="section-label">PLATFORM VISION</span>
+          <h2>Open to Every Administrative Bottleneck</h2>
+          <p>Whether you manage school nutrition, rural works, SDO tenders, or health visits—if your officers face operational bottlenecks, we build and deploy the solution with zero upfront software cost.</p>
+          <button class="btn btn-teal open-modal-btn">Submit Departmental Challenge Scope</button>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- External JS File Imports -->
+  <!-- DEPARTMENTAL BLUEPRINT SCOPE MODAL FORM -->
+  <div id="solutionModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-card">
+      <button id="modalCloseBtn" class="modal-close">&times;</button>
+      <span class="section-label">GOVERNMENT PARTNERSHIP</span>
+      <h3>Submit Departmental Blueprint Scope</h3>
+      <p class="modal-sub">Define your operational bottleneck. Our solution architects will construct a zero-capital deployment proposal for your department.</p>
+
+      <form id="govForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="officer_name">Officer Name / Designation</label>
+            <input type="text" id="officer_name" required placeholder="e.g. District Magistrate / SDO" />
+          </div>
+          <div class="form-group">
+            <label for="department">Department / Ministry</label>
+            <input type="text" id="department" required placeholder="e.g. School Education, PWD" />
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="division">District / State</label>
+            <input type="text" id="division" required placeholder="e.g. Lucknow, Uttar Pradesh" />
+          </div>
+          <div class="form-group">
+            <label for="contact_info">Official Email or Phone</label>
+            <input type="text" id="contact_info" required placeholder="officer@gov.in / +91..." />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="challenge_category">Operational Domain</label>
+          <select id="challenge_category" required>
+            <option value="">Select Domain</option>
+            <option value="Education & Mid-Day Meal">Education & Mid-Day Meal Reconciliation</option>
+            <option value="Public Works & Tenders">Public Works & SDO Tender Verification</option>
+            <option value="Rural Schemes & MGNREGA">Rural Schemes & MGNREGA Audit</option>
+            <option value="Health Visits & ASHA">Health Visits & ASHA/ANM Tracking</option>
+            <option value="Other">Other Operational Bottleneck</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="other_sector_wrapper" style="display: none;">
+          <label for="other_sector_input">Specify Custom Operational Challenge</label>
+          <input type="text" id="other_sector_input" placeholder="Describe the specific administrative domain" />
+        </div>
+
+        <div class="form-group">
+          <label for="problem">Description of Operational Bottleneck</label>
+          <textarea id="problem" rows="3" required placeholder="Describe field conditions, manual tracking friction, or audit leakage points..."></textarea>
+        </div>
+
+        <button type="submit" id="submitBtn" class="btn btn-teal btn-full">Transmit Departmental Blueprint Scope</button>
+      </form>
+    </div>
+  </div>
+
   <script src="field.js"></script>
   <script src="main.js"></script>
 </body>
