@@ -1,119 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rethinkables Technology — Custom GovTech Infrastructure</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Rethinkables Technology — Verified GovTech Infrastructure</title>
+<meta name="description" content="Rethinkables Technology builds zero-capex verification infrastructure for government. Custom operational software and EduAttend.AI with ₹0 upfront cost.">
 
-  <!-- Typography: Newsreader (Editorial Serif), Space Mono (Badges/Data), Plus Jakarta Sans (Body) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css" />
+<!-- External Stylesheet -->
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- BACKGROUND PARTICLE CANVAS -->
-  <canvas id="particleCanvas"></canvas>
+<!-- ══════════ NAVIGATION ══════════ -->
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Rethinkables Technology home">
+    <svg class="brand-mark" width="28" height="28" viewBox="0 0 82 82" aria-hidden="true">
+      <g stroke-linecap="square">
+        <path d="M22 14 V70" stroke="#0A5A4E" stroke-width="7.5"/>
+        <path d="M22 14 H42" stroke="#0A5A4E" stroke-width="7.5"/>
+        <path d="M42 14 a14 14 0 0 1 0 28 H22" fill="none" stroke="#0A5A4E" stroke-width="7.5"/>
+        <path d="M41 42 L62 70" stroke="#C9922A" stroke-width="7.5" stroke-linecap="round"/>
+      </g>
+    </svg>
+    <span class="brand-text">Rethinkables<span class="brand-sub">Technology</span></span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#products">SaaS Portfolio</a>
+    <a href="#how">How It Works</a>
+    <a href="#platform">Platform Vision</a>
+    <button type="button" class="nav-cta open-modal-btn">Let's Build</button>
+  </nav>
+</header>
 
-  <!-- NAVIGATION BAR -->
-  <header class="navbar">
-    <div class="container nav-container">
-      <a href="#" class="brand">
-        <span class="brand-icon">R</span> Rethinkables
-      </a>
-      <nav class="nav-links">
-        <a href="#portfolio">SaaS Portfolio</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#vision">Platform Vision</a>
-        <a href="#contact" class="btn btn-outline-teal nav-btn">Let's Build</a>
-      </nav>
+<!-- ══════════ HERO SECTION ══════════ -->
+<section class="hero" id="top">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <div class="badge-row">
+      <span class="eyebrow">GovTech Verification Infrastructure Engine</span>
+      <span class="dpiit-tag">Startup India DPIIT Recognized</span>
     </div>
-  </header>
+    <h1 class="hero-title">
+      Tamper-evident verification infrastructure for <span class="accent-underline">public operations.</span>
+    </h1>
+    <p class="hero-lede">
+      Rethinkables designs, builds, and deploys tamper-evident operational software for government departments with zero upfront capital risk. Powered by on-device AI and offline-first architecture.
+    </p>
+    
+    <div class="accreditation-bar">
+      <span>Startup India DPIIT Recognized Startup</span> · 
+      <span>StartInUP</span> · 
+      <span>Mentored by iCreate, Gujarat</span> · 
+      <span>DPDP Act, 2023 Compliant</span>
+    </div>
 
-  <main>
-    <!-- HERO SECTION -->
-    <section class="hero-section">
-      <div class="container hero-content">
-        
-        <div class="tags-wrapper reveal">
-          <span class="tag">GOVTECH ENGINE</span>
-          <span class="tag tag-muted">STARTUP INDIA DPIIT RECOGNIZED</span>
+    <div class="hero-guarantee">
+      ⚡ Zero Upfront Software Procurement · Pay Monthly on Verified Field Adoption
+    </div>
+    
+    <div class="hero-actions">
+      <a href="#products" class="btn btn-primary">Explore SaaS Suite</a>
+      <button type="button" class="btn btn-ghost open-modal-btn">Let's Build Solution Architecture</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DE-RISKING MODEL ══════════ -->
+<section class="zero-risk-band reveal">
+  <div class="wrap">
+    <p class="section-eyebrow">De-risking District Adoption</p>
+    <div class="risk-grid">
+      <div class="risk-card">
+        <h3>₹0 Upfront Software Cost</h3>
+        <p>No multi-crore IT tender lock-in. Districts and departments deploy custom verification infrastructure with zero capital risk.</p>
+      </div>
+      <div class="risk-card">
+        <h3>Pay-Per-Month SaaS</h3>
+        <p>Pay purely via predictable monthly operational subscriptions. Scale or pause anytime based on actual field adoption.</p>
+      </div>
+      <div class="risk-card">
+        <h3>100% Audit Protection</h3>
+        <p>Eliminate public fund waste. Every rupee spent is backed by tamper-evident digital logs under DPDP Act, 2023 guidelines.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SAAS PORTFOLIO ══════════ -->
+<section class="band products reveal" id="products">
+  <div class="wrap">
+    <p class="section-eyebrow">SaaS Product Portfolio</p>
+    <h2>Vertical Software Built for Public Operations</h2>
+    
+    <div class="product-suite-grid">
+      <!-- EduAttend.AI (Flagship) -->
+      <article class="product-card">
+        <div>
+          <span class="product-badge badge-pilot">Live &amp; Pilot Ready</span>
+          <h3>EduAttend<span class="ai">.AI</span></h3>
+          <p>Verified classroom attendance and automated mid-day meal reconciliation for government schools. Operates 100% offline on standard smartphones.</p>
         </div>
+        <button type="button" class="product-link open-modal-btn">Request District Pilot &rarr;</button>
+      </article>
 
-        <h1 class="hero-title reveal">
-          Custom digital infrastructure built for <span class="text-underline">any government challenge.</span>
-        </h1>
+      <!-- FieldVerify Engine -->
+      <article class="product-card">
+        <div>
+          <span class="product-badge badge-module">Deployable Engine</span>
+          <h3>FieldVerify Engine</h3>
+          <p>Geotagged, tamper-evident audit logs and telemetry for Public Works, SDO Tenders, and rural infrastructure inspections.</p>
+        </div>
+        <button type="button" class="product-link open-modal-btn">Deploy Infrastructure Module &rarr;</button>
+      </article>
 
-        <p class="hero-description reveal">
-          Rethinkables designs, builds, and deploys purpose-built operational software for public departments with zero upfront capital risk. Powered by on-device AI, offline-first architecture, and custom field workflows tailored to your specific administrative needs.
+      <!-- BeneficiaryTrace -->
+      <article class="product-card">
+        <div>
+          <span class="product-badge badge-module">Pilot Ready</span>
+          <h3>BeneficiaryTrace</h3>
+          <p>On-device verification infrastructure for MGNREGA worker presence, ASHA/ANM health visits, and Anganwadi child nutrition programs.</p>
+        </div>
+        <button type="button" class="product-link open-modal-btn">Request Program Verification &rarr;</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ HOW IT WORKS ══════════ -->
+<section class="band how reveal" id="how">
+  <div class="wrap">
+    <p class="section-eyebrow">Operational Methodology</p>
+    <h2 class="how-title">Four steps. Three minutes. Fully offline.</h2>
+    <ol class="steps">
+      <li class="step">
+        <span class="step-index">01</span>
+        <h3>Capture the field</h3>
+        <p>Staff capture ground realities via lightweight mobile apps with time, location, and verified media stamped on-device.</p>
+      </li>
+      <li class="step">
+        <span class="step-index">02</span>
+        <h3>On-device inference</h3>
+        <p>Matching and telemetry processing occur locally on the phone. No sensitive personal data leaves the local hardware without encryption.</p>
+      </li>
+      <li class="step">
+        <span class="step-index">03</span>
+        <h3>Human confirmation</h3>
+        <p>Unmatched records flag for quick supervisor review. Human judgment remains final; honest field work gains an undeniable record.</p>
+      </li>
+      <li class="step">
+        <span class="step-index">04</span>
+        <h3>Reconcile &amp; report</h3>
+        <p>Records sync automatically when connectivity resumes. Discrepancies are reported as pure arithmetic for district leadership.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══════════ PLATFORM VISION ══════════ -->
+<section class="band platform reveal" id="platform">
+  <div class="wrap">
+    <p class="section-eyebrow light">The wider vision</p>
+    <div class="platform-grid">
+      <div class="platform-lead">
+        <h2>Education is our first product, not our boundary.</h2>
+        <p>
+          The same failure repeats across public programmes: a benefit is sanctioned, a presence is claimed, and no one can verify it. Rethinkables builds the verification engine that applies wherever that gap exists.
         </p>
-
-        <div class="trust-badges reveal">
-          Startup India DPIIT Recognized Startup &nbsp;•&nbsp; StartInUP &nbsp;•&nbsp; Mentored by iCreate, Gujarat &nbsp;•&nbsp; DPDP Act, 2023 Compliant
-        </div>
-
-        <div class="banner-pill reveal">
-          <span class="pill-icon">⚡</span> 
-          <span>Zero Upfront Software Procurement &nbsp;•&nbsp; Pay Monthly on Verified Field Adoption</span>
-        </div>
-
-        <div class="btn-group reveal">
-          <a href="#portfolio" class="btn btn-teal">Explore SaaS Suite</a>
-          <a href="#contact" class="btn btn-outline-dark">Let's Build Solution Architecture</a>
-        </div>
-
+        <p class="platform-note">One core engine. Different department, different budget line — the same root problem.</p>
       </div>
-    </section>
+      <ul class="platform-list">
+        <li><span class="pl-name">EduAttend.AI — Education</span><span class="pl-status">Live &amp; Pilot Ready</span></li>
+        <li><span class="pl-name">FieldVerify — Works &amp; SDO Tenders</span><span class="pl-status">Deployable Module</span></li>
+        <li><span class="pl-name">MGNREGA — Worker Attendance</span><span class="pl-status">Pilot Ready</span></li>
+        <li><span class="pl-name">ASHA / ANM — Health Worker Presence</span><span class="pl-status">Roadmap</span></li>
+        <li><span class="pl-name">PDS — Beneficiary Verification</span><span class="pl-status">Roadmap</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <!-- SAAS PORTFOLIO SECTION -->
-    <section id="portfolio" class="portfolio-section">
-      <div class="container">
-        
-        <div class="section-header reveal">
-          <span class="section-label">SAAS PRODUCT PORTFOLIO</span>
-          <h2 class="section-title">Vertical Software Built for Public Operations</h2>
-        </div>
-
-        <div class="cards-grid">
-          
-          <!-- Card 1: EduAttend.AI -->
-          <div class="card reveal">
-            <div>
-              <div class="card-badge badge-amber">LIVE & PILOT READY</div>
-              <h3>EduAttend<span>.AI</span></h3>
-              <p>Verified classroom attendance and automated mid-day meal reconciliation for government schools. Operates 100% offline on standard smartphones.</p>
-            </div>
-            <a href="#contact" class="card-action">Request District Pilot &rarr;</a>
-          </div>
-
-          <!-- Card 2: FieldVerify Engine -->
-          <div class="card reveal">
-            <div>
-              <div class="card-badge badge-teal">DEPLOYABLE ENGINE</div>
-              <h3>FieldVerify Engine</h3>
-              <p>Geotagged, tamper-evident audit logs and telemetry for Public Works, SDO Tenders, and rural infrastructure projects.</p>
-            </div>
-            <a href="#contact" class="card-action">Deploy Infrastructure &rarr;</a>
-          </div>
-
-          <!-- Card 3: BeneficiaryTrace -->
-          <div class="card reveal">
-            <div>
-              <div class="card-badge badge-teal-light">PILOT READY</div>
-              <h3>BeneficiaryTrace</h3>
-              <p>On-device verification infrastructure for MGNREGA worker presence, ASHA/ANM health visits, and scheme distribution.</p>
-            </div>
-            <a href="#contact" class="card-action">Explore Solution &rarr;</a>
-          </div>
-
-        </div>
-
+<!-- ══════════ PRINCIPLES ══════════ -->
+<section class="band principles reveal">
+  <div class="wrap">
+    <p class="section-eyebrow">How we work</p>
+    <div class="principle-row">
+      <div class="principle">
+        <h3 class="principle-title">We measure, we don't accuse.</h3>
+        <p>Our systems report arithmetic. What is done with it is the administration's decision.</p>
       </div>
-    </section>
-  </main>
+      <div class="principle">
+        <h3 class="principle-title">We earn trust on evidence.</h3>
+        <p>Study the ground, design with the people who use it, pilot against metrics set beforehand.</p>
+      </div>
+      <div class="principle">
+        <h3 class="principle-title">We say so if it doesn't work.</h3>
+        <p>If a pilot misses the standard we set before it began, we report that ourselves.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script src="script.js"></script>
+<!-- ══════════ CALL TO ACTION BANNER ══════════ -->
+<section class="band cta-section reveal">
+  <div class="wrap cta-wrap">
+    <p class="section-eyebrow">Direct Officer Channel</p>
+    <h2>Every district has a ground reality state portals never capture.</h2>
+    <p class="cta-lede">You define the administrative scope. We engineer the zero-capex verification layer.</p>
+    <button type="button" class="btn btn-primary open-modal-btn" style="min-height: 52px; font-size: 16px;">
+      Let's Build Your Solution Architecture &rarr;
+    </button>
+  </div>
+</section>
+
+<!-- ══════════ INTERACTIVE POPUP MODAL ══════════ -->
+<div class="modal-overlay" id="solutionModal" aria-hidden="true">
+  <div class="modal-card">
+    <button type="button" class="modal-close" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+    
+    <div class="modal-header">
+      <p class="section-eyebrow">Confidential Departmental Channel</p>
+      <h3>Let's Build Your Solution Architecture</h3>
+      <p class="modal-sub">Submit your administrative scope for a zero-capex pilot evaluation.</p>
+    </div>
+
+    <form id="govForm" class="gov-form">
+      <div class="form-field">
+        <label for="officer_name">Officer Name &amp; Designation</label>
+        <input type="text" id="officer_name" placeholder="e.g., Shri Rajesh Kumar, IAS / SDO" required>
+      </div>
+
+      <div class="form-field">
+        <label for="department">Department / Ministry</label>
+        <input type="text" id="department" placeholder="e.g., Dept of School Education / Works" required>
+      </div>
+
+      <div class="form-field">
+        <label for="division">District / Administrative Division</label>
+        <input type="text" id="division" placeholder="e.g., Lucknow Division, UP" required>
+      </div>
+
+      <div class="form-field">
+        <label for="contact_info">Official Email / Mobile</label>
+        <input type="text" id="contact_info" placeholder="officer@nic.in / Phone" required>
+      </div>
+
+      <div class="form-field full-span">
+        <label for="challenge_category">Operational Ministry / Department Sector</label>
+        <select id="challenge_category" required>
+          <option value="">-- Select State / Central Ministry Category --</option>
+          <option value="School Education & Literacy">School Education & Literacy (Mid-Day Meal / EduAttend.AI)</option>
+          <option value="Public Works & Infrastructure">Public Works & Infrastructure (SDO Projects / Road Audits)</option>
+          <option value="Health & Family Welfare">Health & Family Welfare (ASHA / ANM Field Telemetry)</option>
+          <option value="Rural Development & Panchayati Raj">Rural Development & Panchayati Raj (MGNREGA Muster Rolls)</option>
+          <option value="Food, Civil Supplies & Consumer Affairs">Food, Civil Supplies & Consumer Affairs (PDS Grain Verification)</option>
+          <option value="Women & Child Development">Women & Child Development (Anganwadi / ICDS Nutrition)</option>
+          <option value="Revenue, Disaster Management & Land Records">Revenue, Disaster Management & Land Records</option>
+          <option value="Other">Other Ministry / Custom Sector (Specify Below)</option>
+        </select>
+      </div>
+
+      <!-- Conditional Manual Entry Field -->
+      <div class="form-field full-span" id="other_sector_wrapper" style="display: none;">
+        <label for="other_sector_input">Specify Custom Ministry / Department Name</label>
+        <input type="text" id="other_sector_input" placeholder="e.g., Irrigation & Water Resources / Police Logistics">
+      </div>
+
+      <div class="form-field full-span">
+        <label for="problem">Where is the system breaking down on the ground?</label>
+        <textarea id="problem" placeholder="Detail the exact ground reality, operational bottleneck, or district scope to be tested with zero capital risk..." required></textarea>
+      </div>
+
+      <div class="full-span">
+        <button type="submit" id="submitBtn" class="form-submit-btn">Transmit Departmental Blueprint Scope</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer">
+  <div class="wrap footer-wrap">
+    <div class="footer-brand">
+      <svg width="24" height="24" viewBox="0 0 82 82" aria-hidden="true">
+        <g stroke-linecap="square">
+          <path d="M22 14 V70" stroke="#FAF8F3" stroke-width="7.5"/>
+          <path d="M22 14 H42" stroke="#FAF8F3" stroke-width="7.5"/>
+          <path d="M42 14 a14 14 0 0 1 0 28 H22" fill="none" stroke="#FAF8F3" stroke-width="7.5"/>
+          <path d="M41 42 L62 70" stroke="#C9922A" stroke-width="7.5" stroke-linecap="round"/>
+        </g>
+      </svg>
+      <span>Rethinkables Technology Private Limited</span>
+    </div>
+    <p class="footer-meta">Registered in Uttar Pradesh · Startup India DPIIT Recognized · StartInUP · Mentored by iCreate, Gujarat</p>
+  </div>
+</footer>
+
+<!-- External JavaScript Libraries & Modular Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="field.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
