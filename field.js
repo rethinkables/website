@@ -1,4 +1,8 @@
-/* Ambient Verification Field Animation */
+/* ============================================================
+   The Verification Field (Ambient Three.js Canvas)
+   A slow drift of small marks — most teal (verified), a few
+   gold (flagged). The product thesis as ambient motion.
+   ============================================================ */
 (function () {
   const canvas = document.getElementById('field');
   if (!canvas || typeof THREE === 'undefined') return;
@@ -10,7 +14,9 @@
   camera.position.z = 26;
 
   const renderer = new THREE.WebGLRenderer({
-    canvas, antialias: true, alpha: true,
+    canvas,
+    antialias: true,
+    alpha: true,
   });
   renderer.setClearColor(0x000000, 0);
 
@@ -18,7 +24,7 @@
   const TEAL_DEEP = new THREE.Color(0x0A5A4E);
   const GOLD = new THREE.Color(0xC9922A);
 
-  const COUNT = 140;
+  const COUNT = window.innerWidth <= 768 ? 80 : 140;
   const FLAGGED = 8;
   const group = new THREE.Group();
   scene.add(group);
