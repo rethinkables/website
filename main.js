@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const btn = document.getElementById('submitBtn');
       if (btn) {
         btn.disabled = true;
-        btn.textContent = "Transmitting Departmental Scope...";
+        btn.textContent = "Sending...";
       }
 
       const selectedCat = categorySelect ? categorySelect.value : '';
@@ -112,20 +112,20 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify(payload)
       })
       .then(() => {
-        alert('Departmental Solution Blueprint Request Received. A senior solution architect from Rethinkables Technology will analyze your field scope and contact your office within 24 hours.');
+        alert('Thank you — your note has reached Rethinkables Technology. We will study what you have described and contact your office within a few working days.');
         govForm.reset();
         if (otherSectorWrapper) otherSectorWrapper.style.display = 'none';
         if (btn) {
           btn.disabled = false;
-          btn.textContent = "Transmit Departmental Blueprint Scope";
+          btn.textContent = "Send to Rethinkables";
         }
         closeModal();
       })
       .catch(error => {
-        alert('Submission notice: If network latency occurs, please write directly to contact@rethinkables.in');
+        alert('If the message does not send, please write to us directly at contact@rethinkables.in');
         if (btn) {
           btn.disabled = false;
-          btn.textContent = "Transmit Departmental Blueprint Scope";
+          btn.textContent = "Send to Rethinkables";
         }
       });
     });
