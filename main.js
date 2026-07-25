@@ -15,16 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Intersection Observer for Scroll Animations
-  const observerOptions = { threshold: 0.15 };
+  // Scroll Animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('active');
-        entry.target.classList.add('in');
       }
     });
-  }, observerOptions);
+  }, { threshold: 0.1 });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
@@ -51,12 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
   if (modal) {
-    // Close modal when clicking dark overlay outside card
     modal.addEventListener('click', (e) => {
       if (e.target === modal) closeModal();
     });
 
-    // Close modal on ESC key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
     });
@@ -126,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         closeModal();
       })
       .catch(error => {
-        alert('Submission notice: If network latency occurs, please also write directly to contact@rethinkables.in');
+        alert('Submission notice: If network latency occurs, please write directly to contact@rethinkables.in');
         if (btn) {
           btn.disabled = false;
           btn.textContent = "Transmit Departmental Blueprint Scope";
