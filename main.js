@@ -1,72 +1,122 @@
-// Header Navbar Scroll Glass Effect
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('nav');
-  if (window.scrollY > 40) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
-});
+/* ============================================================
+   Rethinkables Technology — Interactive Core Script
+   ============================================================ */
 
-// Toggle custom sector manual entry field
-const categorySelect = document.getElementById('challenge_category');
-if (categorySelect) {
-  categorySelect.addEventListener('change', function() {
-    const wrapper = document.getElementById('other_sector_wrapper');
-    const input = document.getElementById('other_sector_input');
-    
-    if (this.value === 'Other') {
-      wrapper.style.display = 'flex';
-      input.required = true;
+document.addEventListener('DOMContentLoaded', () => {
+  // Navigation Scroll Effects
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      nav.classList.add('scrolled');
     } else {
-      wrapper.style.display = 'none';
-      input.required = false;
-      input.value = '';
+      nav.classList.remove('scrolled');
     }
   });
-}
 
-// Direct Google Sheet Endpoint
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwvhJZpRngeCJoNNShy0Z6kHkbJMqZDAMiyQ3ji53TP1Ko6gnb7O8JPYqUJIipypCzX/exec";
+  // Intersection Observer for Scroll Animations
+  const observerOptions = { threshold: 0.15 };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+      }
+    });
+  }, observerOptions);
 
-document.getElementById('govForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  btn.textContent = "Transmitting Field Scope...";
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  const catVal = document.getElementById('challenge_category').value;
-  const otherVal = document.getElementById('other_sector_input').value;
-  
-  const finalSector = catVal === 'Other' ? `Other: ${otherVal}` : catVal;
+  // Modal Open / Close Logic
+  const modal = document.getElementById('solutionModal');
+  const openBtns = document.querySelectorAll('.open-modal-btn');
+  const closeBtn = document.getElementById('modalCloseBtn');
 
-  const payload = {
-      officer_name: document.getElementById('officer_name').value,
-      department: document.getElementById('department').value,
-      division: document.getElementById('division').value,
-      contact: document.getElementById('contact_info').value,
-      challenge: finalSector,
-      problem: document.getElementById('problem').value
-  };
+  function openModal() {
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
 
-  fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-  })
-  .then(() => {
-      alert('Departmental Solution Blueprint Request Received. A senior solution architect from Rethinkables Technology will analyze your field scope and contact your office within 24 hours.');
-      document.getElementById('govForm').reset();
-      document.getElementById('other_sector_wrapper').style.display = 'none';
-      btn.disabled = false;
-      btn.textContent = "Request Departmental Solution Blueprint";
-  })
-  .catch(error => {
-      alert('Submission notice: If network latency occurs, please also write directly to contact@rethinkables.in');
-      btn.disabled = false;
-      btn.textContent = "Request Departmental Solution Blueprint";
+  function closeModal() {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = 'auto';
+  }
+
+  openBtns.forEach(btn => btn.addEventListener('click', openModal));
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  // Close modal when clicking dark overlay outside card
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
   });
-});
 
+  // Close modal on ESC key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  });
+
+  // Toggle Custom Sector Input
+  const categorySelect = document.getElementById('challenge_category');
+  const otherSectorWrapper = document.getElementById('other_sector_wrapper');
+  const otherSectorInput = document.getElementById('other_sector_input');
+
+  if (categorySelect) {
+    categorySelect.addEventListener('change', function () {
+      if (this.value === 'Other') {
+        otherSectorWrapper.style.display = 'flex';
+        otherSectorInput.required = true;
+      } else {
+        otherSectorWrapper.style.display = 'none';
+        otherSectorInput.required = false;
+        otherSectorInput.value = '';
+      }
+    });
+  }
+
+  // Pre-linked Google Apps Script Endpoint
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwvhJZpRngeCJoNNShy0Z6kHkbJMqZDAMiyQ3ji53TP1Ko6gnb7O8JPYqUJIipypCzX/exec";
+
+  const govForm = document.getElementById('govForm');
+  if (govForm) {
+    govForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = "Transmitting Departmental Scope...";
+
+      const selectedCat = categorySelect.value;
+      const customCat = otherSectorInput.value;
+      const finalCategory = selectedCat === 'Other' ? `Other: ${customCat}` : selectedCat;
+
+      const payload = {
+        officer_name: document.getElementById('officer_name').value,
+        department: document.getElementById('department').value,
+        division: document.getElementById('division').value,
+        contact: document.getElementById('contact_info').value,
+        challenge: finalCategory,
+        problem: document.getElementById('problem').value
+      };
+
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        alert('Departmental Solution Blueprint Request Received. A senior solution architect from Rethinkables Technology will analyze your field scope and contact your office within 24 hours.');
+        govForm.reset();
+        if (otherSectorWrapper) otherSectorWrapper.style.display = 'none';
+        btn.disabled = false;
+        btn.textContent = "Transmit Departmental Blueprint Scope";
+        closeModal();
+      })
+      .catch(error => {
+        alert('Submission notice: If network latency occurs, please also write directly to contact@rethinkables.in');
+        btn.disabled = false;
+        btn.textContent = "Transmit Departmental Blueprint Scope";
+      });
+    });
+  }
+});
