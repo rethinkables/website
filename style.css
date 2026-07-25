@@ -1,9 +1,9 @@
 /* ==========================================================================
-   1. EXACT ORIGINAL DESIGN SYSTEM & PALETTE
+   1. DESIGN SYSTEM & COLOR TOKENS
    ========================================================================== */
 :root {
   --bg-cream: #F7F5EE;           /* Warm main background */
-  --bg-card: #F2EFE6;            /* Card fill background */
+  --bg-card: #F2EFE6;            /* Subtle card fill */
   --bg-surface: #FFFFFF;
   
   --text-dark: #121811;          /* Dark main text */
@@ -24,7 +24,7 @@
 }
 
 /* ==========================================================================
-   2. GLOBAL RESET & BASE STYLING
+   2. GLOBAL RESET
    ========================================================================== */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -53,7 +53,7 @@ body {
   margin-inline: auto;
 }
 
-/* Ambient Three.js Verification Canvas */
+/* Ambient Canvas Background */
 #field {
   position: absolute;
   top: 0;
@@ -65,7 +65,7 @@ body {
 }
 
 /* ==========================================================================
-   3. NAVIGATION BAR
+   3. BRAND LOGO & NAVBAR
    ========================================================================== */
 .navbar {
   position: relative;
@@ -77,7 +77,7 @@ body {
 }
 
 .navbar.scrolled {
-  background-color: rgba(247, 245, 238, 0.9);
+  background-color: rgba(247, 245, 238, 0.95);
   backdrop-filter: blur(8px);
 }
 
@@ -90,19 +90,37 @@ body {
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: var(--text-dark);
+  gap: 0.6rem;
   text-decoration: none;
 }
 
 .brand-icon {
   font-family: var(--font-serif);
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: var(--color-teal);
   line-height: 1;
+}
+
+.brand-text {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.brand-sub {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-teal);
+  background: var(--color-teal-light);
+  padding: 2px 6px;
+  border-radius: 2px;
 }
 
 .nav-links {
@@ -116,15 +134,10 @@ body {
   color: var(--text-dark);
   font-size: 0.95rem;
   font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.nav-links a:hover {
-  color: var(--color-teal);
 }
 
 /* ==========================================================================
-   4. HERO SECTION
+   4. HERO & SECTIONS
    ========================================================================== */
 .hero-section {
   position: relative;
@@ -154,7 +167,6 @@ body {
 
 .tag-muted {
   color: var(--text-muted);
-  border-color: var(--border-subtle);
 }
 
 .hero-title {
@@ -197,7 +209,6 @@ body {
   font-size: 0.78rem;
   color: var(--color-teal);
   margin-bottom: 1.75rem;
-  line-height: 1.8;
 }
 
 .banner-pill {
@@ -214,12 +225,33 @@ body {
   margin-bottom: 2.25rem;
 }
 
-/* Buttons */
-.btn-group {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+/* Value Props Bar */
+.value-bar {
+  position: relative;
+  z-index: 5;
+  background-color: var(--bg-surface);
+  border-y: 1px solid var(--border-subtle);
+  padding: 3rem 0;
 }
+
+.grid { display: grid; gap: 1.5rem; }
+.grid-cols-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+.value-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.value-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   5. BUTTONS & CARDS
+   ========================================================================== */
+.btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
 
 .btn {
   display: inline-flex;
@@ -238,12 +270,9 @@ body {
   background-color: var(--color-teal);
   color: #FFFFFF;
   border: 1px solid var(--color-teal);
-  box-shadow: 0 4px 12px rgba(2, 58, 46, 0.15);
 }
 
-.btn-teal:hover {
-  background-color: var(--color-teal-hover);
-}
+.btn-teal:hover { background-color: var(--color-teal-hover); }
 
 .btn-outline-dark {
   background-color: transparent;
@@ -251,24 +280,17 @@ body {
   border: 1px solid var(--text-dark);
 }
 
-.btn-outline-dark:hover {
-  background-color: rgba(0, 0, 0, 0.04);
-}
-
 .btn-outline-teal {
   border: 1px solid var(--color-teal);
   color: var(--color-teal);
+  background: transparent;
   padding: 0.4rem 1rem;
-  border-radius: 4px;
 }
 
-/* ==========================================================================
-   5. SAAS PORTFOLIO CARDS
-   ========================================================================== */
-.portfolio-section {
+.portfolio-section, .how-section, .vision-section {
   position: relative;
   z-index: 5;
-  padding: 4rem 0 6rem 0;
+  padding: 4rem 0 5rem 0;
   border-top: 1px solid var(--border-subtle);
 }
 
@@ -304,8 +326,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .card:hover {
@@ -318,69 +339,119 @@ body {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
   padding: 0.25rem 0.55rem;
   margin-bottom: 1.25rem;
   border-radius: 2px;
 }
 
-.badge-amber {
-  background-color: #D97706;
-  color: #FFFFFF;
-}
+.badge-amber { background-color: #D97706; color: #FFFFFF; }
+.badge-teal { background-color: var(--color-teal-light); color: var(--color-teal); border: 1px solid var(--color-teal); }
+.badge-teal-light { background-color: #E2ECE9; color: var(--text-muted); }
 
-.badge-teal {
-  background-color: var(--color-teal-light);
-  color: var(--color-teal);
-  border: 1px solid var(--color-teal);
-}
-
-.badge-teal-light {
-  background-color: #E2ECE9;
-  color: var(--text-muted);
-}
-
-.card h3 {
-  font-family: var(--font-serif);
-  font-size: 2.1rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-}
-
-.card h3 span {
-  color: var(--color-amber);
-}
-
-.card p {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 1.75rem;
-}
+.card h3 { font-family: var(--font-serif); font-size: 2.1rem; font-weight: 600; margin-bottom: 0.75rem; }
+.card h3 span { color: var(--color-amber); }
+.card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.75rem; }
 
 .card-action {
   font-family: var(--font-mono);
   font-size: 0.82rem;
   font-weight: 700;
   color: var(--color-teal);
-  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
 }
 
+.step-num {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-amber);
+  margin-bottom: 0.5rem;
+}
+
+.vision-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dark);
+  padding: 3rem;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.vision-box h2 { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 1rem; }
+.vision-box p { max-width: 700px; margin: 0 auto 2rem auto; color: var(--text-muted); font-size: 1.1rem; }
+
 /* ==========================================================================
-   6. SCROLL ANIMATIONS
+   6. BLUEPRINT MODAL & FORM
    ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(18, 24, 17, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  padding: 1rem;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background: var(--bg-cream);
+  border: 1px solid var(--border-dark);
+  border-radius: 4px;
+  padding: 2.5rem;
+  max-width: 650px;
+  width: 100%;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--text-dark);
+}
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1rem; }
+.form-group label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--color-teal); }
+.form-group input, .form-group select, .form-group textarea {
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--border-subtle);
+  background: #FFFFFF;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
+.btn-full { width: 100%; margin-top: 0.5rem; }
+
+/* Animations */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.reveal.active, .reveal.in {
-  opacity: 1;
-  transform: translateY(0);
-}
+.reveal.active { opacity: 1; transform: translateY(0); }
