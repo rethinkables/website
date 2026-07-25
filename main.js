@@ -5,19 +5,22 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Navigation Scroll Effects
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-  });
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+  }
 
   // Intersection Observer for Scroll Animations
   const observerOptions = { threshold: 0.15 };
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
+        entry.target.classList.add('active');
         entry.target.classList.add('in');
       }
     });
@@ -31,12 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeBtn = document.getElementById('modalCloseBtn');
 
   function openModal() {
+    if (!modal) return;
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
   }
 
   function closeModal() {
+    if (!modal) return;
     modal.classList.remove('active');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = 'auto';
@@ -45,15 +50,17 @@ document.addEventListener('DOMContentLoaded', () => {
   openBtns.forEach(btn => btn.addEventListener('click', openModal));
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
-  // Close modal when clicking dark overlay outside card
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
+  if (modal) {
+    // Close modal when clicking dark overlay outside card
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
 
-  // Close modal on ESC key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
-  });
+    // Close modal on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+    });
+  }
 
   // Toggle Custom Sector Input
   const categorySelect = document.getElementById('challenge_category');
@@ -63,12 +70,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (categorySelect) {
     categorySelect.addEventListener('change', function () {
       if (this.value === 'Other') {
-        otherSectorWrapper.style.display = 'flex';
-        otherSectorInput.required = true;
+        if (otherSectorWrapper) otherSectorWrapper.style.display = 'flex';
+        if (otherSectorInput) otherSectorInput.required = true;
       } else {
-        otherSectorWrapper.style.display = 'none';
-        otherSectorInput.required = false;
-        otherSectorInput.value = '';
+        if (otherSectorWrapper) otherSectorWrapper.style.display = 'none';
+        if (otherSectorInput) {
+          otherSectorInput.required = false;
+          otherSectorInput.value = '';
+        }
       }
     });
   }
@@ -82,20 +91,22 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
 
       const btn = document.getElementById('submitBtn');
-      btn.disabled = true;
-      btn.textContent = "Transmitting Departmental Scope...";
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "Transmitting Departmental Scope...";
+      }
 
-      const selectedCat = categorySelect.value;
-      const customCat = otherSectorInput.value;
+      const selectedCat = categorySelect ? categorySelect.value : '';
+      const customCat = otherSectorInput ? otherSectorInput.value : '';
       const finalCategory = selectedCat === 'Other' ? `Other: ${customCat}` : selectedCat;
 
       const payload = {
-        officer_name: document.getElementById('officer_name').value,
-        department: document.getElementById('department').value,
-        division: document.getElementById('division').value,
-        contact: document.getElementById('contact_info').value,
+        officer_name: document.getElementById('officer_name')?.value || '',
+        department: document.getElementById('department')?.value || '',
+        division: document.getElementById('division')?.value || '',
+        contact: document.getElementById('contact_info')?.value || '',
         challenge: finalCategory,
-        problem: document.getElementById('problem').value
+        problem: document.getElementById('problem')?.value || ''
       };
 
       fetch(GOOGLE_SCRIPT_URL, {
@@ -108,14 +119,18 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Departmental Solution Blueprint Request Received. A senior solution architect from Rethinkables Technology will analyze your field scope and contact your office within 24 hours.');
         govForm.reset();
         if (otherSectorWrapper) otherSectorWrapper.style.display = 'none';
-        btn.disabled = false;
-        btn.textContent = "Transmit Departmental Blueprint Scope";
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = "Transmit Departmental Blueprint Scope";
+        }
         closeModal();
       })
       .catch(error => {
         alert('Submission notice: If network latency occurs, please also write directly to contact@rethinkables.in');
-        btn.disabled = false;
-        btn.textContent = "Transmit Departmental Blueprint Scope";
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = "Transmit Departmental Blueprint Scope";
+        }
       });
     });
   }
