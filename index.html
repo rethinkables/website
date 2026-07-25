@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rethinkables Technology — GovTech Infrastructure Engine</title>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Newsreader (Serif Headings), Plus Jakarta Sans (Main Sans/Logo), Space Mono (Badges) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 
@@ -25,13 +25,16 @@
     <div class="container nav-container">
       <a href="#" class="brand">
         <span class="brand-icon">R</span> 
-        <span class="brand-text">Rethinkables <span class="brand-sub">TECHNOLOGY</span></span>
+        <div class="brand-text-group">
+          <span class="brand-name">Rethinkables</span>
+          <span class="brand-sub">TECHNOLOGY</span>
+        </div>
       </a>
       <nav class="nav-links">
         <a href="#portfolio">SaaS Portfolio</a>
         <a href="#how-it-works">How It Works</a>
         <a href="#vision">Platform Vision</a>
-        <button class="btn btn-outline-teal nav-btn open-modal-btn">Let's Build</button>
+        <button class="btn btn-outline-dark nav-btn open-modal-btn">Let's Build</button>
       </nav>
     </div>
   </header>
@@ -42,7 +45,7 @@
       <div class="container hero-content">
         
         <div class="tags-wrapper reveal">
-          <span class="tag">GOVTECH ENGINE</span>
+          <span class="tag tag-green">GOVTECH VERIFICATION INFRASTRUCTURE ENGINE</span>
           <span class="tag tag-muted">STARTUP INDIA DPIIT RECOGNIZED</span>
         </div>
 
@@ -64,7 +67,7 @@
         </div>
 
         <div class="btn-group reveal">
-          <a href="#portfolio" class="btn btn-teal">Explore SaaS Suite</a>
+          <a href="#portfolio" class="btn btn-dark">Explore SaaS Suite</a>
           <button class="btn btn-outline-dark open-modal-btn">Let's Build Solution Architecture</button>
         </div>
 
@@ -76,15 +79,15 @@
       <div class="container grid grid-cols-3">
         <div class="value-card reveal">
           <h3>₹0 Upfront Software Cost</h3>
-          <p>No multi-crore IT tender lock-in. Districts deploy custom verification infrastructure with zero capital risk.</p>
+          <p>No multi-crore IT tender lock-in. Districts and departments deploy custom verification infrastructure with zero capital risk.</p>
         </div>
         <div class="value-card reveal">
           <h3>Pay-Per-Month SaaS</h3>
-          <p>Pay purely via predictable monthly subscriptions. Scale or pause anytime based on actual field adoption.</p>
+          <p>Pay purely via predictable monthly operational subscriptions. Scale or pause anytime based on actual field adoption.</p>
         </div>
         <div class="value-card reveal">
           <h3>100% Audit Protection</h3>
-          <p>Eliminate public fund waste. Every rupee spent is backed by tamper-evident digital logs under DPDP guidelines.</p>
+          <p>Eliminate public fund waste. Every rupee spent is backed by tamper-evident digital logs under DPDP Act, 2023 guidelines.</p>
         </div>
       </div>
     </section>
@@ -101,30 +104,30 @@
         <div class="cards-grid">
           
           <!-- Card 1: EduAttend.AI -->
-          <div class="card reveal">
+          <div class="product-card reveal">
             <div>
               <div class="card-badge badge-amber">LIVE & PILOT READY</div>
-              <h3>EduAttend<span>.AI</span></h3>
+              <h3 class="product-title">EduAttend<span class="title-accent">.AI</span></h3>
               <p>Verified classroom attendance and automated mid-day meal reconciliation for government schools. Operates 100% offline on standard smartphones.</p>
             </div>
             <button class="card-action open-modal-btn">Request District Pilot &rarr;</button>
           </div>
 
           <!-- Card 2: FieldVerify Engine -->
-          <div class="card reveal">
+          <div class="product-card reveal">
             <div>
-              <div class="card-badge badge-teal">DEPLOYABLE ENGINE</div>
-              <h3>FieldVerify Engine</h3>
+              <div class="card-badge badge-green-muted">DEPLOYABLE ENGINE</div>
+              <h3 class="product-title">FieldVerify Engine</h3>
               <p>Geotagged, tamper-evident audit logs and telemetry for Public Works, SDO Tenders, and rural infrastructure projects.</p>
             </div>
             <button class="card-action open-modal-btn">Deploy Infrastructure &rarr;</button>
           </div>
 
           <!-- Card 3: BeneficiaryTrace -->
-          <div class="card reveal">
+          <div class="product-card reveal">
             <div>
-              <div class="card-badge badge-teal-light">PILOT READY</div>
-              <h3>BeneficiaryTrace</h3>
+              <div class="card-badge badge-gray-muted">PILOT READY</div>
+              <h3 class="product-title">BeneficiaryTrace</h3>
               <p>On-device verification infrastructure for MGNREGA worker presence, ASHA/ANM health visits, and scheme distribution.</p>
             </div>
             <button class="card-action open-modal-btn">Explore Solution &rarr;</button>
@@ -144,17 +147,17 @@
         </div>
 
         <div class="cards-grid">
-          <div class="card reveal">
+          <div class="product-card reveal">
             <span class="step-num">01</span>
             <h3>Zero Latency Field Capture</h3>
             <p>Field staff capture telemetry and verification logs on basic low-cost smartphones without requiring active internet connection.</p>
           </div>
-          <div class="card reveal">
+          <div class="product-card reveal">
             <span class="step-num">02</span>
             <h3>On-Device Integrity</h3>
             <p>Cryptographic hashes are created on-device at the point of capture, ensuring data cannot be tampered with or retroactively altered.</p>
           </div>
-          <div class="card reveal">
+          <div class="product-card reveal">
             <span class="step-num">03</span>
             <h3>Automated Audit Stream</h3>
             <p>Once connectivity is restored, verified logs auto-sync to departmental dashboards, generating audit-ready compliance trails.</p>
@@ -170,13 +173,13 @@
           <span class="section-label">PLATFORM VISION</span>
           <h2>Open to Every Administrative Bottleneck</h2>
           <p>Whether you manage school nutrition, rural works, SDO tenders, or health visits—if your officers face operational bottlenecks, we build and deploy the solution with zero upfront software cost.</p>
-          <button class="btn btn-teal open-modal-btn">Submit Departmental Challenge Scope</button>
+          <button class="btn btn-dark open-modal-btn">Submit Departmental Challenge Scope</button>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- DEPARTMENTAL BLUEPRINT SCOPE MODAL FORM (HIDDEN BY DEFAULT) -->
+  <!-- MODAL FORM -->
   <div id="solutionModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-card">
       <button id="modalCloseBtn" class="modal-close" aria-label="Close modal">&times;</button>
@@ -229,7 +232,7 @@
           <textarea id="problem" rows="3" required placeholder="Describe field conditions, manual tracking friction, or audit leakage points..."></textarea>
         </div>
 
-        <button type="submit" id="submitBtn" class="btn btn-teal btn-full">Transmit Departmental Blueprint Scope</button>
+        <button type="submit" id="submitBtn" class="btn btn-dark btn-full">Transmit Departmental Blueprint Scope</button>
       </form>
     </div>
   </div>
