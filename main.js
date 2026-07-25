@@ -5,24 +5,33 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Navigation Scroll Effects
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-  });
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+  }
 
-  // Intersection Observer for Scroll Animations
-  const observerOptions = { threshold: 0.15 };
-  const observer = new IntersectionObserver((entries) => {
+  // Optimized Intersection Observer for Scroll Animations
+  // Low threshold + negative rootMargin ensures triggers happen reliably on mobile
+  const observerOptions = {
+    threshold: 0.05,
+    rootMargin: '0px 0px -40px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in');
+        obs.unobserve(entry.target); // Stop watching once revealed for smooth performance
       }
     });
   }, observerOptions);
 
+  // Observe all reveal elements
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   // Modal Open / Close Logic
@@ -31,12 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeBtn = document.getElementById('modalCloseBtn');
 
   function openModal() {
+    if (!modal) return;
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
   }
 
   function closeModal() {
+    if (!modal) return;
     modal.classList.remove('active');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = 'auto';
@@ -45,14 +56,16 @@ document.addEventListener('DOMContentLoaded', () => {
   openBtns.forEach(btn => btn.addEventListener('click', openModal));
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
-  // Close modal when clicking dark overlay outside card
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  }
 
-  // Close modal on ESC key
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+      closeModal();
+    }
   });
 
   // Toggle Custom Sector Input
@@ -60,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const otherSectorWrapper = document.getElementById('other_sector_wrapper');
   const otherSectorInput = document.getElementById('other_sector_input');
 
-  if (categorySelect) {
+  if (categorySelect && otherSectorWrapper && otherSectorInput) {
     categorySelect.addEventListener('change', function () {
       if (this.value === 'Other') {
         otherSectorWrapper.style.display = 'flex';
@@ -85,8 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.disabled = true;
       btn.textContent = "Transmitting Departmental Scope...";
 
-      const selectedCat = categorySelect.value;
-      const customCat = otherSectorInput.value;
+      const selectedCat = categorySelect ? categorySelect.value : '';
+      const customCat = otherSectorInput ? otherSectorInput.value : '';
       const finalCategory = selectedCat === 'Other' ? `Other: ${customCat}` : selectedCat;
 
       const payload = {
