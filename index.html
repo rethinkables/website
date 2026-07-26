@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rethinkables Technology — Instruments for Government</title>
-  <meta name="description" content="Rethinkables builds field instruments for government — offline-first software that lets officers see the ground truth for themselves. Verification, attendance, and reconciliation, on ordinary smartphones." />
+  <meta name="description" content="Rethinkables builds field instruments for government — offline-first software that lets officers see the ground truth for themselves. Verification, attendance, and reconciliation on ordinary smartphones." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -162,6 +162,49 @@
     </div>
   </section>
 
+  <!-- OUR DESIGN PHILOSOPHY -->
+  <section class="section philosophy" id="philosophy">
+    <div class="container">
+      <p class="eyebrow reveal">How we think about this</p>
+      <h2 class="lead-h reveal">Why we build the way we do.</h2>
+      
+      <div class="philosophy-grid">
+        <div class="philo-card reveal">
+          <h3>We design for adoption, not ideals.</h3>
+          <p>
+            Software fails in government not because the logic is wrong, but because it doesn't fit how 
+            people actually work. We build around field realities: connectivity, multitasking, resistance, fatigue. 
+            If officers don't adopt it, the design failed — not them.
+          </p>
+        </div>
+
+        <div class="philo-card reveal">
+          <h3>We report arithmetic, not verdicts.</h3>
+          <p>
+            Claimed 38 meals. Verified 35. Difference of 3. That's what you see. What you do with it 
+            is yours alone. We measure; we do not accuse. The interpretation belongs to the officer.
+          </p>
+        </div>
+
+        <div class="philo-card reveal">
+          <h3>We stay silent about what we don't know.</h3>
+          <p>
+            We won't claim field experience we don't have. We won't promise metrics we haven't tested. 
+            We won't guess at your constraints. We learn by listening, by piloting, by failing small before asking you to scale.
+          </p>
+        </div>
+
+        <div class="philo-card reveal">
+          <h3>Risk is ours until it works.</h3>
+          <p>
+            You don't pay upfront. You don't commit capital. You don't take the reputational hit if we 
+            misunderstood your problem. We carry that. You pay only when your officers actually use it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CREDIBILITY -->
   <section class="section credibility">
     <div class="container cred-inner">
@@ -250,21 +293,24 @@
   </footer>
 
   <!-- MODAL -->
-  <div id="solutionModal" class="modal-overlay" aria-hidden="true">
+  <div id="solutionModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modal-h">
     <div class="modal-card">
-      <button id="modalCloseBtn" class="modal-close" aria-label="Close">&times;</button>
-      <p class="eyebrow">Government partnership</p>
-      <h3 class="modal-h">Describe your department's problem</h3>
+      <button id="modalCloseBtn" class="modal-close" aria-label="Close dialog">&times;</button>
+      
+      <p class="eyebrow">Start a conversation</p>
+      <h2 id="modal-h" class="modal-h">What's breaking in your department?</h2>
       <p class="modal-sub">
-        You understand the problem on the ground better than anyone. Tell us what your officers are
-        dealing with, and we will design an instrument built around how your department actually works.
+        You understand the ground better than anyone. Tell us what your officers are dealing with — 
+        the tracking that fails, the data you cannot verify, the problem you're accountable for. 
+        We'll listen and respond within a few working days.
       </p>
 
       <form id="govForm">
+        <!-- Department Selection -->
         <div class="form-group">
-          <label for="challenge_category">Which department?</label>
+          <label for="challenge_category">Which department are you from?</label>
           <select id="challenge_category" required>
-            <option value="">Select department</option>
+            <option value="">Select your department</option>
             <option value="School Education">School Education</option>
             <option value="Public Works">Public Works (PWD)</option>
             <option value="Rural Development / Panchayati Raj">Rural Development / Panchayati Raj</option>
@@ -277,39 +323,94 @@
           </select>
         </div>
 
+        <!-- Custom Department Input (hidden until "Other" is selected) -->
         <div class="form-group" id="other_sector_wrapper" style="display:none;">
           <label for="other_sector_input">Which department?</label>
-          <input type="text" id="other_sector_input" placeholder="Name the department" />
+          <input 
+            type="text" 
+            id="other_sector_input" 
+            placeholder="Name the department" 
+            aria-describedby="other-help"
+          />
+          <small id="other-help" style="color: var(--ink-soft); font-size: 0.85rem; margin-top: 0.3rem; display: block;">
+            e.g., Disaster Management, Urban Development
+          </small>
         </div>
 
+        <!-- Problem Description -->
         <div class="form-group">
-          <label for="problem">What breaks today?</label>
-          <textarea id="problem" rows="3" required placeholder="Describe the conditions in the field, the tracking that fails, or the records that cannot be trusted."></textarea>
+          <label for="problem">What's the core issue?</label>
+          <textarea 
+            id="problem" 
+            rows="4" 
+            required 
+            placeholder="Be specific: What data can't you verify? Where do claims and reality diverge? What tracking fails on the ground?"
+            aria-describedby="problem-help"
+          ></textarea>
+          <small id="problem-help" style="color: var(--ink-soft); font-size: 0.85rem; margin-top: 0.3rem; display: block;">
+            The more specific you are, the better we can help.
+          </small>
         </div>
 
+        <!-- Officer Details Grid -->
         <div class="form-grid">
           <div class="form-group">
             <label for="officer_name">Your name &amp; designation</label>
-            <input type="text" id="officer_name" required placeholder="e.g. District Magistrate" />
+            <input 
+              type="text" 
+              id="officer_name" 
+              required 
+              placeholder="e.g. District Magistrate, Block Education Officer" 
+            />
           </div>
           <div class="form-group">
-            <label for="department">Office</label>
-            <input type="text" id="department" required placeholder="e.g. Office of the DM" />
+            <label for="department">Your office</label>
+            <input 
+              type="text" 
+              id="department" 
+              required 
+              placeholder="e.g. Office of the DM, District School Office" 
+            />
           </div>
         </div>
 
+        <!-- Location & Contact Grid -->
         <div class="form-grid">
           <div class="form-group">
-            <label for="division">District / State / Country</label>
-            <input type="text" id="division" required placeholder="e.g. Uttar Pradesh, India" />
+            <label for="division">District / State</label>
+            <input 
+              type="text" 
+              id="division" 
+              required 
+              placeholder="e.g. Lucknow, Uttar Pradesh" 
+            />
           </div>
           <div class="form-group">
             <label for="contact_info">Email or phone</label>
-            <input type="text" id="contact_info" required placeholder="officer@gov.in / +91..." />
+            <input 
+              type="text" 
+              id="contact_info" 
+              required 
+              placeholder="officer@gov.in / +91..." 
+            />
           </div>
         </div>
 
-        <button type="submit" id="submitBtn" class="btn btn-solid btn-full">Send to Rethinkables</button>
+        <!-- Submit Button -->
+        <button type="submit" id="submitBtn" class="btn btn-solid btn-full">
+          Send to Rethinkables
+        </button>
+
+        <!-- Submission Note -->
+        <p style="
+          font-size: 0.82rem; 
+          color: var(--ink-soft); 
+          text-align: center; 
+          margin-top: 1rem;
+          line-height: 1.5;
+        ">
+          We read every message. You'll hear from us within a few working days.
+        </p>
       </form>
     </div>
   </div>
