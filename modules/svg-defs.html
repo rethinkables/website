@@ -1,0 +1,29 @@
+<!-- 
+  RETHINKABLES BRAND SVG DEFINITIONS
+  Define once, reuse everywhere with <use> tags.
+  Eliminates the SVG mark duplication (header, footer, etc.)
+-->
+
+<svg width="0" height="0" style="display: none;" aria-hidden="true">
+  <!-- Brand Mark — used in header, footer, and potentially other locations -->
+  <defs>
+    <g id="brand-mark-icon" stroke-linecap="square">
+      <path d="M22 14 V70" stroke-width="7.5"/>
+      <path d="M22 14 H42" stroke-width="7.5"/>
+      <path d="M42 14 a14 14 0 0 1 0 28 H22" fill="none" stroke-width="7.5"/>
+      <path d="M41 42 L62 70" stroke-width="7.5" stroke-linecap="round"/>
+    </g>
+  </defs>
+</svg>
+
+<!-- 
+  Usage in header:
+  <svg class="brand-mark" width="32" height="32" viewBox="0 0 82 82" aria-hidden="true">
+    <use href="#brand-mark-icon" stroke="#0A3F31"/>
+  </svg>
+
+  Usage in footer (with different color):
+  <svg width="26" height="26" viewBox="0 0 82 82" aria-hidden="true">
+    <use href="#brand-mark-icon" stroke="#F4F1E8"/>
+  </svg>
+-->
